@@ -1,0 +1,33 @@
+list dstList = {3}
+
+from 50 nodes in dstList do {
+    filter("MAC.opcode" == 1 and "MAC.srcMACAddress" != "0A-AA-00-00-00-0C") 
+
+	packet arpPacket 
+
+    var srcMac = "Empty"
+    var srcIp = "Empty"
+    var dstIp = "Empty"
+
+    retrieve(original, "MAC.srcMACAddress", srcMac)
+    retrieve(original, "MAC.srcIPAddress", srcIp)
+    retrieve(original, "MAC.destIPAddress", dstIp)
+
+	create(arpPacket, "MAC.type", "0040")
+	
+	change(arpPacket, "MAC.opcode", 2)
+	change(arpPacket, "MAC.srcMACAddress", "0A-AA-00-00-00-0C" ) 
+    change(arpPacket, "MAC.destMACAddress", srcMac)
+	change(arpPacket, "MAC.srcIPAddress", dstIp)
+	change(arpPacket, "MAC.destIPAddress", srcIp)
+
+    change(arpPacket, "controlInfo.src", "0A-AA-00-00-00-0C")
+    change(arpPacket, "controlInfo.dest", srcMac)
+    change(arpPacket, "controlInfo.etherType", 2054)
+
+    change(arpPacket, "sending.outputGate", "net_eth_inf$o[0]")
+
+    drop(original, 0)
+
+    send(arpPacket, 0.001)
+}

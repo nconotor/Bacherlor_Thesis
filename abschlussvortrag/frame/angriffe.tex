@@ -1,0 +1,244 @@
+\subsection{ARP-Spoofing}
+\begin{frame}{ARP-Spoofing Ablauf}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\begin{center}
+				\only<1>{ARP-Anfrage Broadcast}
+				\only<2>{ARP-Antwort Unicast}
+				\only<3>{ARP-Spoofed-Antwort Unicast}
+				\includestandalone[keepaspectratio, width= 0.9\textwidth]{tikz/baArpExample}
+			\end{center}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{center}
+				\begin{onlyenv}<1>
+					Anfrage (alice$\Rightarrow$alle)
+					\begin{tabular}{|c|c|}
+						\hline
+						Feld & Wert \\
+						\hline
+						SHA & 00-00-00-00-00-01 \\
+						\hline
+						SPA & 1.1.1.1 \\
+						\hline
+						THA & FF-FF-FF-FF-FF-FF \\
+						\hline
+						TPA & 1.1.1.2 \\
+						\hline
+					\end{tabular}
+				\end{onlyenv}
+				\begin{onlyenv}<2>
+					Antwort (bob$\Rightarrow$alice)
+					\begin{tabular}{|c|c|}
+						\hline
+						Feld & Wert \\
+						\hline
+						SHA & \textcolor{ForestGreen}{00-00-00-00-00-02} \\
+						\hline
+						SPA & 1.1.1.2 \\
+						\hline
+						THA & 00-00-00-00-00-01 \\
+						\hline
+						TPA & 1.1.1.1 \\
+						\hline
+					\end{tabular}
+				\end{onlyenv}
+				\begin{onlyenv}<3>
+					Antwort (eve$\Rightarrow$alice)
+					\begin{tabular}{|c|c|}
+						\hline
+						Feld & Wert \\
+						\hline
+						SHA & \textcolor{red}{00-00-00-00-00-03} \\
+						\hline
+						SPA & 1.1.1.2 \\
+						\hline
+						THA & 00-00-00-00-00-01 \\
+						\hline
+						TPA & 1.1.1.1 \\
+						\hline
+					\end{tabular}
+				\end{onlyenv}
+				
+			\end{center}
+		\end{column}
+	\end{columns}
+	\note{
+		Notes
+	}
+\end{frame}
+
+\begin{frame}[fragile, t]{ARP-Spoofing Umsetzung}
+	\begin{onlyenv}<1>
+		\begin{block}{Probleme}
+			\begin{itemize}
+				\item fehlende Hilfsfunktionen
+				\item Unterscheidung von Paketfeldern
+				\item falsche filter-Implementierung
+			\end{itemize}
+		\end{block}
+		
+		\textbf{Datenpakete filtern} \\
+		\begin{tabular}{c}
+			\lstinputlisting[language=ADL, firstline=0, lastline=4, basicstyle=\scriptsize, firstnumber=1]{listings/arpServer.adl}
+		\end{tabular}
+	\end{onlyenv}
+
+	\begin{onlyenv}<2>
+		\begin{block}{Probleme}
+			\begin{itemize}
+				\item Vorinitialisierung
+			\end{itemize}
+		\end{block}
+	
+		\textbf{Daten auslesen} \\
+		\begin{tabular}{c}
+			\lstinputlisting[language=ADL, firstline=8, lastline=14, basicstyle=\scriptsize, firstnumber=8]{listings/arpServer.adl}
+		\end{tabular}
+	\end{onlyenv}
+
+
+	\begin{onlyenv}<3>
+		\begin{block}{Probleme}
+			\begin{itemize}
+				\item fehlende ARP-Implementierung
+			\end{itemize}
+		\end{block}
+		
+		\textbf{Neues ARP-Datenpaket erstellen} \\
+		\begin{tabular}{c}
+			\lstinputlisting[language=ADL, firstline=16, lastline=26, basicstyle=\scriptsize, firstnumber=16]{listings/arpServer.adl}
+		\end{tabular}
+	\end{onlyenv}
+
+	\begin{onlyenv}<4>
+		\begin{block}{Probleme}
+			\begin{itemize}
+				\item falsche Dokumentation
+			\end{itemize}
+		\end{block}
+	
+		\textbf{Letzte Änderungen} \\
+		\begin{tabular}{c}
+			\lstinputlisting[language=ADL, firstline=28, lastline=32, basicstyle=\scriptsize,firstnumber=28]{listings/arpServer.adl}
+		\end{tabular}
+	\end{onlyenv}
+	\note{
+		Notes
+	}
+\end{frame}
+
+%\begin{frame}{Probleme bei der Umsetzung}
+%	\begin{columns}
+%		\begin{column}{0.5\textwidth}
+%			\textbf{Fehlende...}
+%			\begin{itemize}
+%				\item Anbindung der Switches
+%				\item ARP-Implementierung
+%				\item Hilfsfunktionen
+%			\end{itemize}
+%		\end{column}
+%		\begin{column}{0.5\textwidth}
+%			\textbf{Falsche...}
+%			\begin{itemize}
+%				\item ADL-Definitionen
+%				\item Dokumentation
+%				\item Implementierung bedingter Angriffe
+%			\end{itemize}
+%		\end{column}
+%	\end{columns}
+%\end{frame}
+
+\subsection{SYN-Flooding}
+
+\begin{frame}[fragile]{SYN-Flooding}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\begin{center}
+				\textbf{TCP-Handshake}
+				\includestandalone[keepaspectratio]{tikz/baTCPHandshake}
+			\end{center}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{visibleenv}<1>
+				\begin{center}
+					\textbf{SYN-Flooding}
+					\includestandalone[keepaspectratio]{tikz/baTCPSynFlood}
+				\end{center}
+			\end{visibleenv}
+		\end{column}
+	\end{columns}
+	
+	\note{
+		Notes
+	}
+\end{frame}
+
+\subsection{Firewall-Scanner}
+
+\begin{frame}{ACK-Firewall-Scanner}
+%	\visible<1>{\begin{block}{Implementierung}
+%Implementierung ähnlich zu den vorherigen Angriff!
+%	\end{block}}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\begin{center}
+				\includestandalone[keepaspectratio]{tikz/baTCPAckAnswer}
+			\end{center}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{center}
+				\textbf{Probleme}
+				\begin{itemize}
+					\item Wissen über Zustand des Systems
+					\begin{itemize}
+						\item Wurde das Gerät bereits getestet?
+					\end{itemize}
+					\item Firewall-Module
+					\item Port-Range-Definieren
+				\end{itemize}
+			\end{center}
+		\end{column}
+	\end{columns}
+	
+	\note{
+		Notes
+	}
+\end{frame}
+
+%\begin{frame}{SEA++-Änderungen}
+%	\begin{columns}[onlytextwidth,t] 
+%		\begin{column}{0.5\textwidth}
+%			\textbf{Änderungen am Quellcode}
+%			\begin{enumerate}
+%				\item<1-> Fehlerbehebung
+%				\item<2-> Erweiterung um ARP
+%				\begin{itemize}
+%					\item Erweiterbarkeit beschrieben im Handbuch
+%				\end{itemize}
+%			\end{enumerate}
+%		\end{column}
+%		\begin{column}{0.5\textwidth}
+%			\begin{onlyenv}<1>
+%				\textbf{\adl{filter} $\Rightarrow$ Absturz}
+%				\begin{itemize}
+%					\item jedes Datenpaket betrachten
+%					\item Schicht prüfen 
+%					\item wenn Datenpaketklasse unbekannt 
+%					\begin{itemize}
+%						\item[$\Rightarrow$] Unbehebbarer Fehler
+%					\end{itemize}
+%				\end{itemize}
+%			\end{onlyenv}
+%			\begin{onlyenv}<2->
+%				\textbf{\only<2>{3}\only<3>{4} Erweiterungen}
+%				\begin{enumerate}
+%					\item \file{seapputils.cc} $\Rightarrow$ Schicht zurückgeben
+%					\item \file{Create.h} $\Rightarrow$ Neues Enum
+%					\item \file{Create.cc} $\Rightarrow$ Paket zusammenbauen
+%					\item<3> \file{Change.cc} $\Rightarrow$ Typecast
+%				\end{enumerate}
+%			\end{onlyenv}
+%		\end{column}
+%	\end{columns}
+%\end{frame}

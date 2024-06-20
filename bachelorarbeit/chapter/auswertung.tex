@@ -1,0 +1,251 @@
+\chapter{Auswertung} \label{chap:auswertung5}
+In diesem Kapitel sollen die Ergebnisse vorgestellt werden, welche aus dem Modell gewonnen werden konnten. Nach der Betrachtung der Ergebnisse, werden die Probleme, welche bei der Arbeit mit \gls{seapp} entstanden sind, aufgezeigt.
+
+\section{Ergebnisse}
+Bei der Ergebnisanalyse wird vorrangig auf die Paketdurchsätze  eingegangen, welche sich je nach Angriff verändern könnten. Falls weitere Daten durch den Dienst gespeichert werden, welcher vom Angriff ausgenutzt wird, werden diese zusätzlich betrachtet. Sollte der Paketdurchsatz kein eindeutiges Bild zeigen, wird auf die Ping-Module zurückgegriffen.
+
+\subsection{ARP-Poisoning}
+Der ARP-Angriff wurde in zwei unterschiedlichen Varianten durchgeführt, welche sich in dem Ziel des Angriffs unterscheiden. 
+ 
+\begin{figure}[ht]
+	\centering
+	\includesvg[width=0.9\linewidth,  keepaspectratio,]{pic/arp/ArpAnzahlServer}
+	\caption[Vollständige ARP-Auflösungen]{Vollständige ARP-Auflösungen im Serverbereich der IRB}
+	\label{fig:arpAngriffKomplett}
+\end{figure}
+ 
+In der Grafik \ref{fig:arpAngriffKomplett} werden die vollständig beendeten ARP-Auflösungen im Serverbereich für jeden Server und den fünf Durchläufen ohne und mit Angriff betrachtet. Besonders auffällig ist hierbei der erste Server, von welchem der Angriff ausgeht. In den fünf Ausführungen der Simulation mit Angriff werden jeweils vier ARP-Auflösungen beendet, was einen starken Rückgang zu den sonst 32 bis 40 Auflösungen darstellt. Unter Beachtung der initiierten ARP-Auslösungen \ref{app:initArp}, kann festgestellt werden, dass bekannte Einträge im ARP-Cache während des Angriffs in unter \SI{30}{\second} genutzt werden, so dass diese nicht gelöscht werden. Bei allen anderen Servern kann kein eindeutiges abweichendes Verhalten festgestellt werden. Weitere Erkenntnisse können durch die Betrachtung des Netzwerkdatenverkehrs gewonnen werden.
+
+\begin{figure}[ht]
+	\centering 
+	\begin{subfigure}{0.45\textwidth}
+		\includesvg[width=\linewidth,  keepaspectratio]{pic/arp/ArpBitIrb}
+		\caption[Übertragene Bits im IRB-Serverbereich]{Summe der übertragenen Bits im IRB-Serverbereich gemessen zwischen Switch und Router}
+		\label{fig:arpBitIrb}
+	\end{subfigure}
+	\hfil
+	\begin{subfigure}{0.45\textwidth}
+		\includesvg[width=\linewidth,  keepaspectratio]{pic/arp/ArpBitStudenten}
+		\caption[Übertragene Bits im studentischen Bereich]{Summe der übertragenen Bits im studentischen Bereich gemessen zwischen Switch und Router}
+		\label{fig:arpBitStudenten}
+	\end{subfigure}
+	\label{fig:arpBits}
+	\caption[Übertragene Bits des ARP-Angriffs]{Summe der übertragenen Bits im studentischen Bereich und Serverbereich}
+\end{figure}
+
+In Abbildung \ref{fig:arpBitIrb} wird der Datenverkehr zwischen dem IRB-Router und IRB-Switch dargestellt. Dies stellt die gesamte Anzahl an übertragenen Bits zwischen den Servern und dem Restnetz dar. Es wird unterschieden in ein- und ausgehenden Datenverkehr. Die fünf Durchläufe sind jeweils in den Farben blau, rot, dunkelgrün, gelb und hellgrün als Balken übereinander dargestellt. 
+
+Der erste und vierte Balken geben jeweils den ein- und ausgehenden Datenverkehr des ARP-Angriffs auf den Server an und sind im summierten Netzwerkverkehr der fünf Durchläufe etwa 90 \% niedriger, als in einem normalen Durchlauf.
+
+In der Angriffskonfiguration auf den studentischen Bereich, dargestellt in dem zweiten und fünften Balken, sind die Auswirkungen geringer. Der kumulierte Datenverkehr sinkt um ungefähr 19 \%. 
+
+Es ist ein unterschiedliches Ergebnis zu beobachten in Abbildung \ref{fig:arpBitStudenten}. Hier sind die Auswirkungen beider Angriffsvarianten zu erkennen. In der Summe sind die Folgen des Angriffs auf den Serverbereich, mit Ausnahme des ersten Durchlaufs, im ein- und ausgehenden Datenverkehr größer. Dort ist der eingehende Datenverkehr im Serverangriffsszenario größer als im studentischen Szenario. Nach der Betrachtung des gesamten Netzwerksegments, werden die einzelnen Geräte untersucht.
+
+\begin{figure}[ht]
+	\centering
+	\includesvg[width=\linewidth,  keepaspectratio]{pic/arp/ArpIrbBitsOverview} 
+	\caption[IRB-Server-Datenverkehr mit ARP-Angriff]{Der ein- und ausgehende Datenverkehr aller IRB-Server bei Ausführung des ARP-Angriffs }
+	\label{fig:arpIrbBitsOverview}
+\end{figure}
+
+Die Grafik \ref{fig:arpIrbBitsOverview} zeigt die Summe des ein- und ausgehenden Datenverkehrs der IRB-Server, mit farblich übereinander gestapelten Durchläufen. Alle Server außer dem angreifenden Server (0) zeigen weniger Netzwerkaktivität. Nur im zweiten Durchlauf (rot) ist eine geringere Aktivität von Server zwei zu erkennen. Begründet werden kann dies mit der Implementierung des Angriffs, welcher leicht verzögert mit einer gefälschten ARP-Antwort reagiert. Falls die Originalantwort später eintrifft, überschreibt diese die manipulierte Antwort und die Kommunikation wird ermöglicht.
+
+Die gleichen Beobachtungen \ref{app:arpStudenten} können beim Angriff auf den studentischen Bereich gemacht werden. Als Nächstes wird der gesamte Netzwerkdatenverkehr am IRB-Router betrachtet. 
+
+\begin{figure}[ht]
+	\centering
+	\includesvg[width=0.7\linewidth, keepaspectratio,]{pic/arp/ArpBitTotal.svg}
+	\caption[Gesamter Datenverkehr am Router]{Gesamter Datenverkehr am Router mit und ohne ARP-Angriff}
+	\label{fig:arpBitTotal}
+\end{figure}
+
+In der Abbildung \ref{fig:arpBitTotal} werden die aufsummierten Netzwerkdaten der fünf Wiederholungen von den drei unterschiedlichen Angriffskonfiguration dargestellt. Da \gls{omnetpp} nicht genug unterschiedliche Farben zur Unterscheidung der Ports zur Verfügung stellt, werden diese im einzelnen nicht genauer betrachtet. Im Vergleich der Konfigurationen (Balken), ist zu erkennen, dass bei dem ARP-Poisoning im Serverbereich der Netzwerkverkehr um {ca.} 80\% einbricht. Dies zeigt eine Störung des gesamten Netzwerks.
+
+Wenn der normale Durchlauf mit dem ARP-Angriff auf den studentischen Bereich verglichen wird, kann ein Rückgang von {ca.} 16\% festgestellt werden. Dies ist mit {ca.} 15 \% der Netzwerkgeräteanteil am Gesamtnetzwerk. Erwartungsgemäß sind die Auswirkungen eines Angriffs auf einen wichtigeren Teil des Netzwerks größer.
+
+Im Bezug auf den Netzwerkverkehr kann zusammenfassend geschlossen werden, dass der ARP-Angriff fatale Folgen für den betroffenen Netzwerkbereich hat. Wenn viele Verbindungen auf diesen Bereich aufbauen, wie in dieser Simulation der Serverbereich, kann das ganze Netzwerk gestört werden. Im besten Fall fällt ein Teilbereich des Netzwerks vollständig aus. Eine Betrachtung von weiteren Parametern ist aufgrund der Deutlichkeit der Ergebnisse nicht nötig.
+
+\subsection{DoS-Angriff}\label{sec:dos}
+Die DoS-Angriffe wurden in drei unterschiedlichen Intensitäten und zwei verschiedenen Konfigurationen durchgeführt. Im Folgenden werden die Intensitäten mit klein, mittel und groß sowie die unterschiedlichen Konfigurationen als \gls{dos} mit und ohne Ausfall des Servers bezeichnet.
+
+\begin{figure}[ht]
+	\centering
+	\includesvg[width=\linewidth, keepaspectratio]{pic/dos/InternetRouterThruput.svg}
+	\caption[Durchschnittliche Datenrate pro Sekunde am IRB-Router]{Durchschnittliche ein- und ausgehende Datenrate pro Sekunde am IRB-Router unter Beobachtung der einzelnen DoS-Angriffe}
+	\label{fig:internetRouterThruput}
+\end{figure}
+
+Abbildung \ref{fig:internetRouterThruput} stellt den Netzwerkdurchsatz aller DoS-Angriffe dar. Es wird zwischen ein- und ausgehendem Durchsatz unterschieden. Alle Angriffe zeigen deutliche Auswirkungen auf den Netzwerkdatenverkehr. Die Angriffsvariante mit einer großen Intensität erzeugt  \SI{8}{\giga\bit\per\second} eingehenden und  \SI{2.25}{\giga\bit\per\second} ausgehenden Datenverkehr inklusive der ungefähr \SI{1}{\giga\bit\per\second}, welche im Normalzustand zustande kommen.
+
+Ein Unterschied zwischen der Variante mit dem Ausfall des Servers ist im ausgehenden Datenverkehr zu erkennen. Dieser fällt bei der Deaktivierung des Servers auf ein normales Level zurück. Analog kann diese Beobachtung für alle Angriffsintensitäten gemacht werden. Es ist zu vermuten, dass der ausgehende Datenverkehr aus Bestätigungssegmente für den Verbindungsaufbau besteht.
+
+Der kleine und mittlere Angriff erzeugen eine niedrigere Belastung für das Netzwerk. Im eingehenden Datenverkehr können \SI{6}{\giga\bit\per\second} für den mittleren Angriff und  \SI{3.2}{\giga\bit\per\second} für den kleinen Angriff beobachtet werden. Der ausgehende Datenverkehr ist analog reduziert. 
+
+\begin{figure}[ht]
+	\centering
+	\includesvg[width=\linewidth, keepaspectratio]{pic/dos/UtilRouterWichtige.svg}
+	\caption[IRB-Router Verbindungsauslastung]{Auslastung der Verbindungen am IRB-Router mit und ohne DoS-Angriff} 
+	\label{fig:utilRouterWichtige}
+\end{figure}
+
+Bei den Datenraten der Angriffe ist zu vermuten, dass das Netzwerk seine Funktionalität beibehält und nur bei bedeutend größeren Angriffen zusammenbricht. Um dieser Vermutung nachzugehen wird die Auslastung am Router betrachtet. In Abbildung \ref{fig:utilRouterWichtige} wird diese für alle Konfigurationen außer denen mit ausgefallenen Servern betrachtet. Die jeweiligen Durchläufe sind farbig gekennzeichnet und nach Nummer des Port gruppiert. 
+
+In keiner Konfiguration ist ein Router Port überlastet. Die höchste Auslastung kommt am Port 0 mit 80\% zustande. Es sei angemerkt, dass die Verbindungskapazitäten der einzelnen Ports unterschiedlich sind, und damit der Balken von Port 0 und 14 eine höhere absolute Kapazität aufweisen, als die restlichen Ports.
+
+Die 80 \% Auslastung des Ports kann von außen nur minimal erhöht werden. Um eine Überlastung der Router-Ports zu simulieren, müsste die restliche Universität Daten produzieren und mit der Informatik austauschen. Da dies in dieser Simulation nicht geschieht, kann maximal die Universitätsanbindung ausgelastet werden, womit \SI{10}{\giga\bit\per\second} möglich sind, was unterhalb der zentralen Verbindungen des Fakultätsnetzes liegt.
+
+Da festgestellt wurde, dass die simulierten Angriffe nicht reichen, um das Netzwerk zu überlasten, wird erwartet, dass die Auswirkungen des DoS-Angriffs auf die restlichen Teile des Netzwerkes sich nicht in der Datenübertragung widerspiegeln.
+
+\begin{figure}[ht]
+	\centering
+	\includesvg[width=\linewidth, keepaspectratio]{pic/dos/TotalBitsWichtige.svg}
+	\caption[Summe der übertragenen Bits der jeweiligen Teilnetze]{Summe aller übertragenen Bits der einzelnen Teilnetze am IRB Router bei Ausführung der drei DoS Angriffe und einem Durchlauf ohne Angriff}
+	\label{fig:totalBitsWichtige}
+\end{figure}
+
+Um dies zu zeigen, werden die gesamt übertragenen Bits an den jeweiligen Router Ports genutzt. In Abbildung \ref{fig:totalBitsWichtige} werden diese für die Angriffe ohne Ausfall des Servers dargestellt. Die Ergebnisse sind analog zu der vollständigen Darstellung, welche sich im Anhang \ref{app:dosTotalBits} befindet.
+
+Eine Auffälligkeit ergibt sich zwischen dem Durchlauf ohne und dem Durchlauf mit kleinem Angriff. Obwohl der Netzwerkverkehr bei letzterem höher liegen sollte, ist dies nicht in der Darstellung zu erkennen. Eine Erklärung für dieses Verhalten könnte eine unterschiedliche Reihenfolge der Zufallsvariablen sein. Auf diesen Punkt wird in Abschnitt \ref{aus:Zufallszahlen} genauer eingegangen.
+
+Abgesehen von den Ports zum Internet und zu den Servern kann in der Grafik \ref{fig:totalBitsWichtige} kein großer Unterschied bei dem Netzwerkverkehr der Lehrstühle festgestellt werden. Dies deutetet darauf hin, dass das Gesamtnetzwerk nicht eingeschränkt ist.
+
+Wenn die Auswirkungen des Angriffs sich nicht in einer Reduzierung des Datenverkehrs widerspiegeln, können trotzdem Quality-of-Service-Parameter betroffen sein. Um dies zu Untersuchen wird der Pingverlust im Internet und die \gls{rtt} betrachtet.
+
+\begin{figure}[ht]
+	\centering
+	\includesvg[width=\linewidth, keepaspectratio]{pic/dos/PingLossLarge.svg}
+	\caption[Pingverlust mit DoS-Angriff]{Pingverlust mit und ohne DoS-Angriff}
+	\label{fig:pingLossLarge}
+\end{figure}
+
+Der Pingverlust wird für den großen Angriff und dem normalen Durchlauf betrachtet (Abbildung \ref{fig:pingLossLarge}). Bei dem Vergleich der beiden Durchläufe kann ein Anstieg der Pingverlustintensität bemerkt werden. In dem normalen Durchlauf zeigen neun Module 1 \% an Pingverlust. Hingegen zeigen bei dem Angriff insgesamt 29 Module einen Paketverlust mit bis zu 3 \%. Es sei angemerkt, dass die Pingmodule in Sekundenintervallen Pings senden und deshalb nur relativ wenige Pings als Grundlage für diese Beobachtung dienen. Da die Simulation Schwankungen zeigt, sollten weitere Untersuchungen zum Pingverlust gemacht werden. Zuletzt wird die \gls{rtt} der Module betrachtet.
+\begin{figure}[ht]
+	\centering
+	\begin{subfigure}{0.5\textwidth}
+			\includesvg[width=0.9\linewidth, keepaspectratio]{pic/dos/RTTLarge.svg}
+			\caption{RTT mit DoS Angriff }
+			\label{fig:rTTDosLarge}
+	\end{subfigure}%
+	\begin{subfigure}{0.5\textwidth}
+			\includesvg[width=0.9\linewidth, keepaspectratio]{pic/dos/RTTNormal.svg}
+			\caption{RTT ohne Angriff }
+			\label{fig:rTTDosNormal}
+	\end{subfigure}
+
+	\caption[RTT zu den Internetservern]{Vergleich der RTT zu den Internetservern mit und ohne Server}
+	\label{fig:rTTDos}
+\end{figure}
+
+In Grafik \ref{fig:rTTDos} werden die \gls{rtt} für die Pingmodule, welche die Internetserver anpingen, dargestellt. Die Abbildung \ref{fig:rTTDosLarge} stellt den großen \gls{dosa} dar und Abbildung \ref{fig:rTTDosNormal} den normalen Durchlauf. Mit den \gls{omnetpp}-Analysemöglichkeiten  kann kein Unterschied zwischen beiden Abbildungen festgestellt werden und daher kein abschließendes Fazit bezüglich der Netzwerkqualität gezogen werden. Hierfür müssten die Histogrammdaten genauer betrachtet und aggregiert werden. Dies ist nicht mit der \gls{omnetpp}-IDE möglich. Der Angriff ist jedoch auf Netzwerkdatenverkehrsebene zu erkennen. Hilfreich für die weitere Analyse wären Ausführungen mit mehr Datenpaketen pro Sekunde, welche für diese Arbeit zu lange gedauert hätten. 
+
+Der \gls{dosa} zeigt Limitierungen bei der Arbeit mit \gls{omnetpp} und \gls{seapp}. Insbesondere bessere TCP-Anwendungen könnten weitere Daten liefern, da so nur ein grobes Modell eines realen Ausfalls durch Deaktivierung des Knotens simuliert werden konnte. Eine genaue Betrachtung der Probleme folgt im zweiten Teil \ref{sec:bewertung}.
+
+\subsection{Port-Scanner}
+Für den Port-Scan werden jeweils fünf Durchläufe ohne und mit Angriff betrachtet, um  Veränderungen im Verhalten des Netzes zu erkennen. 
+
+\begin{figure}[ht]
+	\centering
+	\begin{subfigure}{0.45\textwidth}
+		\includesvg[width=\linewidth, keepaspectratio]{pic/port/PortAngriffThruput}
+		\caption[Paketaufkommen erster Server]{Summe der gesendeten und empfangenen Datenpakete der fünf Durchläufe mit und ohne Port-Scanner am irbServer[0]} 
+		\label{fig:portAngriffThruput}
+	\end{subfigure}
+	\hfil
+	\begin{subfigure}{0.45\textwidth}
+		\includesvg[width=\linewidth, keepaspectratio]{pic/port/PortAngriffThruputIrbRouter}
+		\caption[Paketaufkommen des IRB-Serverbereich]{Summe der gesendeten und empfangenen Datenpakete der fünf Durchläufe mit und ohne Port-Scanner zwischen IRB-Servern und IRB-Router} 
+		\label{fig:paketaufkommenServerIrbZuRouter}
+	\end{subfigure}
+	\label{fig:sumPortScan}
+	\caption[Port-Scanner Paketaufkommen]{Summe der gesendeten und empfangenen Datenpakete der fünf Durchläufe mit und ohne Port-Scanner am Server und dem gesamten Serverbereich}
+\end{figure}
+
+Zuerst werden die gesendeten und empfangenen Datenpakete des ersten Servers, welcher den Angriff ausführt, in Abbildung \ref{fig:portAngriffThruput} betrachtet. In den fünf Durchläufen produziert der Port-Scan-Angriff ein viermal höheres Paketaufkommen. Insbesondere bei dem ersten (blau) und dritten Durchlauf (dunkelgrün), fallen mehr Datenpakete an. 
+
+Da der Durchlauf mit Port-Scanner immer mehr Datenpakete erzeugen sollte, kann der Durchlauf vier (gelb), in dem weniger Datenpakete übertragen wurden, nicht erklärt werden. Ein Problem mit der Reihenfolge der Zufallsvariablen scheint sich wie in Abschnitt \ref{sec:dos} zu wiederholen. Diese Vermutung wird bestärkt durch den stark erhöhten Paketdurchsatz des ersten und dritten Durchlaufs. Durch diese Unstimmigkeit lässt sich kein klarer Trend bei der Grafik \ref{fig:portAngriffThruput}  erkennen.
+
+Werden die akkumulierten Datenpakete aller Server bei der Verbindung zwischen Router und IRB-Switch betrachtet (\ref{fig:paketaufkommenServerIrbZuRouter}), wiederholt sich das Bild, dass der erste und dritte Durchlauf mehr Datenpakete produzieren bei dem Port-Scanner. Die Anomalie, dass der vierte Durchlauf weniger Datenpakete im Vergleich zum Durchlauf ohne Angriff erzeugt, ist nicht mehr auffindbar. Dies ist ein weiteres Indiz dafür, dass die Zufallsverteilung anders abgelaufen ist und daher das Netzwerk anders konfiguriert wurde. 
+
+Der gesamte Serverbereich überträgt abgesehen von dem ersten und dritten Durchlauf zwischen 1 \% und 5 \% Datenpakete mehr. 
+
+\begin{figure}[ht]
+	\centering
+	\includesvg[width=\linewidth,  keepaspectratio]{pic/port/PortThruputRouter}
+	\caption[Durchschnittliche Datenrate am IRB-Router]{Durchschnittliche Datenrate der ein- und ausgehenden Verbindungen an den Ports zum Internet und Serverbereich des IRB-Routers}  
+	\label{fig:portPaketAufkommenIrbRouter}
+\end{figure}
+
+In der Grafik \ref{fig:portPaketAufkommenIrbRouter} wird der durchschnittliche ein- und ausgehende Netzwerkdurchsatz pro Sekunde an dem zentralen Router im Mittel aller Durchläufe betrachtet. Die Verbindungen zu den Lehrstühlen wurden aus Übersichtlichkeitsgründen nicht dargestellt. Der erhöhte Datenverkehr bei dem ersten und dritten Durchlauf zeigt sich in einem erhöhten eingehenden Netzwerkdurchsatz am Port 14. Dies ist zu erkennen an der gelben und roten Kurve, welche etwa  \SI{20}{\mega\bit\per\second} voneinander abweichen.
+
+Außer dieser Abweichung kann bei Betrachtung der jeweiligen Verläufe der Kurven,  festgestellt werden, dass die Abweichungen zwischen Normal- und Angriffsdurchlauf minimal sind. Beide Durchläufe liegen teilweise über oder unter der jeweils anderen in ihrer Durchschnittsdatenrate. Durch leichte Verzögerungen können Datenpakete bei einem Betrachtungsfenster von einer Sekunde bereits viele Datenpakete in ein anderes Zeitfenster fallen und somit dieses Bild erzeugen. 
+
+Insgesamt kann kein eindeutiger Schluss aus dem Netzwerkverkehr gezogen werden. Für die weitere Analyse wäre ein Zugriff auf die gesendeten ACK- und empfangenen RST-Segmente interessant. Allerdings werden ohne eine Modifikation des TCP-Moduls keine Skalarwerte für die empfangenen RST-Segmente gespeichert. Darüber hinaus werden die ACK-Segmente nur in Vektoren gespeichert, was die Analyse bei der großen Datenmenge erschwert\footnote{Die Analysetools von \gls{omnetpp} stürzen bei zu großen Dateien ab. Nutzung von alternativen Analysetools wurde nicht getestet, da für diese die Daten in andere Formate konvertiert werden mussten und dies zu ähnlichen Problemen führte. Eine weitere Lösung wäre mehr RAM-Speicher im Rechner zu nutzen, da \gls{omnetpp} einen hohen Speicherverbrauch zeigt (\ref{app:auslastung}).} hat.
+
+
+\section{Bewertung der Arbeit mit SEA++}\label{sec:bewertung}
+Die Arbeit mit \gls{seapp} hat gezeigt, dass es mit der Erweiterung möglich ist, Angriffe in einer \gls{dsl} zu formulieren. Jeder der drei durchgeführte Angriffe, hätte ohne die Erweiterung in \gls{omnetpp} durchgeführt werden können. Hierfür hätten eigene Module implementiert werden können. Mit \gls{seapp} ist es im Gegensatz zu einer nativen Implementierung möglich die Angriffe schneller umzusetzen und einfacher zu modifizieren. Ein gutes Beispiel dafür ist der \gls{dosa}, welcher ohne Aufwand in mehreren Varianten durchgeführt werden konnte. Änderungen am Netzwerk sind im Gegensatz zu einer Implementierung über Module nicht mehr nötig.
+
+Im Gegensatz zu dem guten Eindruck bei der Formulierung von Angriffen, hat die Arbeit mit \gls{seapp} einige Schwächen und Probleme gezeigt, welche im Folgenden einzeln betrachtet werden sollen. 
+
+\subsection{Zufallszahlen}\label{aus:Zufallszahlen}
+In \gls{omnetpp} werden Zufallszahlen über einen festgelegten Hashwert generiert. Dieses Vorgehen sichert, dass bei gleichen Hashwert in jedem Durchlauf die gleiche Reihenfolge an Zufallszahlen generiert werden \cite[\absatz{7.4}]{OmnetManual}. 
+
+Allerdings sind bei dem Vergleich zwischen kleinem und keinem \gls{dosa} und dem Port-Scanner Unstimmigkeiten aufgetreten. Der normale Ablauf hat mehr Datenpakete oder Daten erzeugt hat als das Szenario mit Angriff. Durch die gleichen Zufallszahlen und Simulationsdauer sollte dies nicht geschehen.
+
+Bestätigt werden kann das Verhalten durch mehre Durchläufe, welche von der gleichen Konfiguration erben. Mit den zusätzlichen Konfigurationen \ned{KeinAngriffEmptyAttack, KeinAngriffLateAttack} und \ned{KeinAngriffNoAttack}, welche jeweils eine leere, eine nach Simulationsende startende und eine nicht vorhandene XML-Angriffskonfigurationsdatei verwenden, wird ein Experiment zur Verifikation erstellt. Dabei zeigen alle Varianten (\ref{app:zufallsverteilung}) unterschiedliche Auslastungen der Server, obwohl kein Angriff ausgeführt oder geladen wurde. Damit ist die Abweichung gesichert, aber kein Grund für diese gefunden. Weitere Experimente sind nötig, um dieses Verhalten abschließend zu klären. 
+
+\subsection{Dokumentation}\label{aus:Dokumentation}
+Weder von der \gls{asl} noch von \gls{seapp} existiert eine allumfassende Dokumentation, was dazu führt, dass die Einarbeitung in \gls{seapp} umständlich ist. Im Moment gibt es drei Quellen für die einzelnen Aspekte von \gls{seapp}:
+\begin{itemize}
+	\item das Benutzerhandbuch \cite{SEAManual},
+	\item ein Papier \cite{Tiloca2014}, indem \gls{seapp} zuerst vorgestellt wurde
+	\item und einem Journalbeitrag über Neuerungen im \gls{omnetpp}-Umfeld\ cite{Tiloca2019}.
+\end{itemize}  
+Alle drei Quellen unterscheiden sich in Details. Beispielsweise wird in dem Benutzerhandbuch \cite[Listing 3.13]{SEAManual} ein Beispiel gegeben, indem in der Filterbedingung \adl{UDP.sourcePort} als Identifikator eines Feldes genutzt wird. Dies widerspricht der Definition \cite[\absatz{7.3.2.5}]{Tiloca2019} und kann mit der aktuellen Version von \gls{seapp} nicht übersetzt werden.
+
+Zusätzlich ist in allen drei Veröffentlichungen die Definition für den \adl{drop}-Befehl abweichend hinsichtlich der aktuellen Umsetzung\footnote{Als aktuelle Umsetzung wird die am 30. Dezember 2019 veröffentlichte Version bezeichnet.} beschrieben. Der aktuelle Interpreter benötigt einen zusätzlichen Verzögerungsparameter, welche in den Veröffentlichungen nicht genannt wurde. Es ist zu vermuten, dass die Veröffentlichungen sich jeweils auf unterschiedliche Versionen von \gls{seapp} beziehen. Da es keine Hinweise dazu gibt und keine fortlaufende Versionssummierung existiert, führen diese Ungenauigkeiten zu Problemen, die \gls{adl} nachzuvollziehen. Weitere Unschärfen in der Dokumentation sind beispielsweise die unklare Bezeichnung der \gls{adl}/\gls{asl}, welche in Kapitel \ref{chap:programme2} angemerkt wurde.
+
+Eine zentrale Dokumentation der Komponenten, inklusive der \gls{adl}, würde dieses Problem beheben. Hierbei sollte darauf geachtet werden, eine fortlaufende Versionierung von \gls{seapp} zu erstellen, um Funktionen, welche auf eine bestimmte Version beschränkt sind, sofort zu erkennen.
+
+\subsection{Analyse}\label{aus:Analyse}
+Die Analyse von Angriffen ist einer der Hauptaspekte, mit welchem \gls{seapp} beworben wird  \cite[\absatz{7.5}]{Tiloca2019}. In der aktuellen Version basieren die Analysemöglichkeiten vollständig auf \gls{omnetpp}. Dies hat den Vorteil, dass Weiterentwicklungen der \gls{omnetpp}-Analysetools gleichzeitig eine \gls{seapp}-Verbesserung bedeuten. Mit dem Versionswechsel zu Version 6 von \gls{omnetpp} werden die Analysemöglichkeiten stark überarbeitet und auf \gls{python} umgestellt. Von dieser Änderung kann \gls{seapp} stark profitieren, da, solange die Datenformate der Ergebnisdateien nicht geändert werden, die neuen Analysemöglichkeiten genutzt werden können. Änderungen am Analyseverhalten sind vorteilhaft, da bei dem Erstellen der Grafiken mit \gls{omnetpp} für die Bachelorarbeit Skalierungsprobleme und Abstürze häufig vorkamen. Zusätzlich fehlen Möglichkeiten Skalarwerte effektiv zu filtern und zusammenzufassen. Des Weiteren fehlten nach dem Export bei den Grafiken die y-Achsen-Beschriftungen, sodass diese manuell hinzugefügt werden mussten.
+
+Weiterhin sollte \gls{seapp} eigene Daten sammeln. Beispielsweise ist es im Sicherheitskontext interessant, welche Knoten von modifizierten Datenpaketen erreicht wurden. Im Standardzustand speichert dies kein Modul. \gls{seapp} könnte dies durch den \ned{LocalFilter} implementieren.
+
+\subsection{Einschränkungen durch veraltete Programmkomponenten}\label{aus:alteVersionen}
+Die Einschränkung von \gls{seapp} auf ältere Versionen von \gls{inet} und \gls{omnetpp} schränkt die Aussagekraft von komplexeren Netzwerken stark ein. Technologien wie \gls{vlan} sind wichtig zur korrekten Darstellung von \zB dem Fakultätsnetzwerk.
+
+Zusätzlich wird die Wiederverwendbarkeit von Modellen stark eingeschränkt, da \gls{omnetpp} und \gls{inet} zwischen Version 4 und 5 beziehungsweise Version 2 und 4 einige inkompatible Änderungen erfahren haben. Beispielsweise wurde das Modul \ned{StandardHost}\footnote{Aktuelle Version des Moduls: \url{https://doc.omnetpp.org/inet/api-current/neddoc/inet.node.inet.StandardHost.html}} im  Anwendungsschichtbereich stark überarbeitet. Neuentwicklungen der Anwendungsmodule sind deshalb inkompatibel mit den alten \gls{inet} Versionen.
+
+Ein Update auf die neue \gls{omnetpp}-Version würde diese Probleme beheben und zusätzlich die Einrichtung und Einarbeitung durch bessere Dokumentation der neueren Versionen erleichtern.
+
+\subsection{Flexibilität}\label{aus:Flexibilität}
+Der direkte Bezug auf die Parameter schränkt die Portabilität der Simulation stark ein. Konkret zeigt sich das Problem bei kleinen Änderungen an einem bestehenden Modell. Jede Änderung an der Simulation kann möglicherweise die NodeId ändern und jede Änderung kann die IP- und MAC-Adressen ändern. Dies führt leicht zu Fehlern und schränkt die Wiederverwendbarkeit des Modells stark ein.
+
+Weiterhin werden Definitionen von Angriffen durch fehlenden Zugriff auf die aktuellen Parameter der Simulation stark eingeschränkt. Ein Beispiel hierfür wären dynamisch zugewiesene Adressen, welche nicht aus den jeweiligen Speichern der Knoten ausgelesen werden können. Das Wissen des Angreiferknotens ist für einige Angriffe relevant, um Beispielsweise bestimmte Geräte aus der ARP-Tabelle anzugreifen.
+
+Diese Probleme könnte durch die Implementierung von Funktionen, wie beispielsweise   \ini{moduleListByPath} in \gls{omnetpp}, gelöst werden. Insbesondere eine Funktion für die Knoten-Id würde die Arbeit mit \gls{seapp} erleichtern.
+
+\subsection{Modularität}\label{aus:Modularität}
+Die in dieser Arbeit genutzte Netzwerktopologie spiegelt nicht den ersten Ansatz für die Modellierung wieder. Ursprünglich war geplant das Netzwerk modular aus selbsterstellten zusammengesetzten Modulen zu modellieren, welche eine bestimmte Anzahl von StandardHost zu einer Funktionseinheit zusammenfassen. Von dieser Modellierung wurde abgewichen, da kein dokumentierter Weg bestand, die einzelnen \gls{lep} in den Host dieser Funktionseinheit zusammenzufassen. Eine solche Lösung wäre vorteilhaft, da die Darstellung und Implementierung des Netzwerks dadurch erleichtert werden.
+
+\subsection{Erweiterbarkeit}\label{aus:Erweiterbarkeit}
+Bei der Implementierung von Angriffen mit Filterbedingungen stürzt ein unmodifiziertes \gls{seapp} ab, weil einige Nachrichten in dem Netzwerk nicht implementiert wurden. Dieses Verhalten führt dazu, dass \gls{seapp} für jede Nachricht erweitert werden muss, ungeachtet davon, ob die entsprechende Nachricht abgefangen werden soll.
+
+Zusätzlich sind nicht alle Nachrichtentypen, welche bei einer Simulation mit der genutzten \gls{inet} Version auftreten können, implementiert. Erweiterungen von \gls{seapp} sind daher ohne Modifikation nötig gewesen.
+
+Die Erweiterbarkeit ist allerdings eingeschränkt, da nicht alle Erweiterungsdetails dokumentiert wurden. Weiterhin steigt die Quellcodekomplexität durch verschachtelte und lange Konditionalabfragen für die einzelnen Datenpakete. Weniger fest implementierte (Hardcoded) Funktionen, in denen neue Datenpakete definiert werden, könnten dieses Problem lösen. Dateien in einer strukturierten Sprache wie \gls{xml} könnten Definitionen für neue Datenpakete enthalten und damit eine einfachere Erweiterbarkeit von \gls{seapp} sicherstellen.
+
+Bei der Erweiterbarkeit ist zusätzlich ein Problem mit der Dokumentation aufgekommen, welche nicht erwähnte, dass für Adresstypen weitere Erweiterungen notwendig sind. Adresstypen, wie IPv4- oder MAC-Adressen benötigen in der aktuellen Implementierung spezielle Methoden, welche ein Cast zu den entsprechenden \gls{c++}-Typen durchführt. Ohne diese Modifizierung ist ein Setzen der Felder mit \adl{change} nicht möglich. Weitere Programmmethoden, um solche Prozesse zu automatisieren wären vorteilhaft.
+
+\subsection{Einschränkungen durch fehlende Module}\label{aus:fehlendeModule}
+Ein weiteres Problem, welches im Rahmen dieser Arbeit auftrat und die Ausdrucksfähigkeit von \gls{seapp} einschränkte, sind fehlende Module. Es fehlen zum einen Module  um Netzwerksicherheitskomponenten wie \zB Firewall und Paketfilter zu implementieren. Zum anderen fehlen viele Protokolle, welche im Sicherheitskontext relevant sind, wie \zB \gls{tls}. Das Fehlen dieser Protokolle wurde bereits von den Erstellern angemerkt \cite[\absatz{7.5}]{Tiloca2019}. 
+
+Zusätzlich sollten Module, welche typischen Netzwerkverkehr generieren, kompatibel zu \gls{seapp} gemacht werden. Das Fehlen dieser Module, schränkt die Anpassbarkeit des in dieser Arbeit untersuchten Netzwerks stark ein.
+
+\subsection{Sprachumfang}\label{aus:Sprachumfang}
+Angriffe, welche beispielsweise auf bestimmten Portbereiche Segmente erzeugen, sind im Moment nur eingeschränkt zu realisieren. In einem bedingten Angriff, wie dem Port-Scanner, kann nicht generisch ein Paketarray mit einem Portbereich erstellt werden. Aus diesem Grund müsste, um einen größeren Bereich an Ports zu scannen, für jeden Port ein neues Segment mit allen Zuweisungen des Angriffs erstellt werden.
+
+Zusätzlich wäre es bei den Port-Scanner hilfreich, Daten zu speichern, um beispielsweise bereits bekannte Server nicht erneut zu kontaktieren. Eine Erweiterung der Listendatenstruktur könnte dies realisieren.
+
+Innerhalb einer Abfrage kann zusätzlich nicht auf ein bestimmtes Feld reagiert werden. Funktionen um Konditionalabfragen und Schleifen in einem Angriff durchzuführen, würden dieses Problem beheben. Die Komplexität der Sprache würde allerdings steigen und neue Fehlervektoren hinzukommen.

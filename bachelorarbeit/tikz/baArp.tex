@@ -1,0 +1,16 @@
+\documentclass[border={.5 .5 .5 2mm}]{standalone}
+\usepackage{tikz}
+\usepackage{bytefield}
+\begin{document}
+	\begin{bytefield}[endianness=little]{16}
+		\bitheader{0-15} \\
+		\wordbox{1}{Hardware type  } \\
+		\wordbox{1}{Protocol type   } \\
+		\bitbox{8}{HLN } & \bitbox{8}{PLN } \\
+		\wordbox{1}{Operation code } \\
+		\wordbox{3}{Sender hardware address (SHA)} \\
+		\wordbox{2}{Sender protocol address (SPA)} \\
+		\wordbox{3}{Target hardware address (THA)} \\
+		\wordbox{2}{Target protocol address (TPA)} \\
+	\end{bytefield}
+\end{document}

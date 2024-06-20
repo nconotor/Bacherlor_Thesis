@@ -1,0 +1,201 @@
+% !TeX spellcheck = de_DE
+%
+% Folien getestet mit: latexmk -lualatex --shell-escape -silent -latexoption="-synctex=1" %
+% Argumente werden direkt an die Beamer-Class weitergeben
+% aspectratio=43 | 169 | 1610 
+% Getestet wird mit 1610
+% Auf Linux eignet sich https://pdfpc.github.io/ zum präsentieren
+%
+
+\documentclass[aspectratio=169,usenames,dvipsnames,rgb]{../tuprolis}
+\metroset{subsectionpage=progressbar}
+\usetikzlibrary{calc}
+\usepackage{tikz}
+\usetikzlibrary{backgrounds,calc,positioning}
+\usepackage{pgfplots}
+\usepackage{listings}
+\usepackage{pgfpages}
+\usepackage{xparse}
+\usepackage[binary-units,per-mode=repeated-symbol]{siunitx}
+\sisetup{locale=DE}
+\DeclareSIUnit{\packets}{\ensuremath{p}}
+\usepackage{standalone}
+\usepackage{bytefield}
+\usepackage{varwidth}
+\usepackage{svg}
+\usepackage{adjustbox}
+
+%\setbeameroption{show notes on second screen}
+\usetikzlibrary{decorations.pathreplacing,shapes,positioning,arrows,automata,positioning,shapes,fit,plotmarks,decorations,decorations.pathreplacing,arrows,intersections, pgfplots.fillbetween, calc,backgrounds,decorations.markings}
+\usepackage[backend=biber]{biblatex}
+\addbibresource{../bib/source.bib}
+\nocite{*} 
+
+\newcommand{\tikzmark}[1]{\tikz[baseline={(#1.base)},overlay,remember picture] \node[outer sep=0pt, inner sep=0pt] (#1) {\phantom{A}};}
+
+%% syntax
+%%%\mybrace{<first>}{<second>}[<Optional text>]
+\NewDocumentCommand\mybrace{mmo}{%
+	\IfValueTF {#3}{%
+		\begin{tikzpicture}[overlay, remember picture,decoration={brace,amplitude=1ex}]
+		\draw[decorate,thick] (#1.north east) -- (#2.south east) node[midway, right=0.1cm] {$=$}node[midway, right=0.5cm,text=black,text width = 2in,] {{#3}};
+		\end{tikzpicture}%
+	}%
+	{%
+		\begin{tikzpicture}[overlay, remember picture,decoration={brace,amplitude=1ex}]
+		\draw[decorate,thick] (#1.north east) -- (#2.south east);
+		\end{tikzpicture}%
+	}%
+}%
+
+\newbibmacro*{author:title:year}{%
+	\printnames{labelname}%
+	\setunit{\addcolon\space}%
+	\printfield[citetitle]{labeltitle}%
+	\setunit{\addcomma\space}%
+	\printdate
+}
+
+\DeclareCiteCommand{\atycite}
+{\usebibmacro{prenote}}
+{\usebibmacro{author:title:year}}
+{\multicitedelim}
+{\usebibmacro{postnote}}
+
+
+\makeatletter
+\def\blfootnote{\xdef\@thefnmark{}\@footnotetext}
+\makeatother
+
+
+\usepackage{listings}
+\renewcommand\lstlistlistingname{Quellcodeverzeichnis}
+
+\lstset
+{ 
+	basicstyle=\tiny,
+	numbers=left,
+	stepnumber=1,
+	showstringspaces=false,
+	tabsize=1,
+	breaklines=true,
+	breakatwhitespace=false,
+}
+
+\lstdefinelanguage{NED} {
+	morekeywords={allowunconnected,bool,channel,channelinterface,connections,const,
+		default,double,extends,false,for,gates,if,import,index,inout,input,
+		int,like,module,moduleinterface,network,output,package,parameters,
+		property,simple,sizeof,string,submodules,this,true,types,volatile,@display
+		xml,xmldoc},
+	sensitive=true,
+	morecomment=[l]{//},
+	morestring=[b]",
+}
+
+\lstdefinelanguage{INI} {
+	morekeywords={},
+	sensitive=true,
+	morecomment=[l]{\#},
+	morestring=[b]",
+}
+
+\lstdefinelanguage{ADL} {
+	morekeywords={var,retrieve,original,create,change,drop,send,filter,list,from,nodes,do,retrieve,packet,put,destroy},
+	sensitive=true,
+	morecomment=[l]{\#},
+	morestring=[b]",
+}
+
+
+\newcommand{\ned}[1]{\sloppy\texttt{#1}}
+\newcommand{\ini}[1]{\sloppy\texttt{\textit{#1}}}
+\newcommand{\adl}[1]{\sloppy\textit{\textbf{#1}}}
+\newcommand{\csource}[1]{\sloppy\textbf{#1}}
+\newcommand{\file}[1]{\sloppy\textit{#1}}
+
+%\setbeameroption{show notes on second screen}
+%\setbeameroption{show only notes}
+
+%----------------------------------------------------------
+%Beamer Einstellungen
+%----------------------------------------------------------
+
+\title{Bachelorabschlussvortrag}
+
+\subtitle{Simulative Analyse von Cyber-Angriffen am Beispiel des Netzes der Fakultät für Informatik der TU Dortmund}
+
+\institute{Bachelorabschlussvortrag am Lehrstuhl 4 - Informatik}
+
+\author{Nils Dunker}
+
+\date{8. Februar 2021}
+
+%----------------------------------------------------------
+%Folieninhalt
+%----------------------------------------------------------
+
+\usepackage[xindy, toc]{glossaries}
+\makeglossaries
+\input{config/glossarie}
+\makeindex
+
+\begin{document}
+	
+%Deckblatt
+\frame[plain]{\titlepage} 
+
+%\begin{frame}[plain]{Inhalt}
+%	\tableofcontents[hideallsubsections]
+%	\note{
+%		Im folgenden werde ich meine Bachelor Arbeit vorstellen. Dabei möchte Ich die wichtigen Komponenten meines Themas vorstellen sowie eine erste Planung meines Vorgehens präsentieren. Zuletzt werde ich kurz auf meine Literatur eingehen .
+%		\begin{itemize}
+%			\item BA Vorstellen
+%			\item Dabei
+%			\begin{itemize}
+%				\item Thema vorstellen 
+%				\item Ablauf
+%			\end{itemize}
+%		\end{itemize}
+%	}
+%\end{frame}
+
+
+\section{Themeneinführung}
+
+\input{frame/thema}
+
+{
+	\metroset{sectionpage=none}
+	\section{Werkzeuge}
+}
+
+\subsection{OMNeT++, INET und SEA++}
+\input{frame/omnet} 
+
+\input{frame/seapp}
+
+\section{Netzwerkmodellierung}
+\input{frame/netzwerkKonfiguration}
+
+{
+	\metroset{sectionpage=none}
+	\section{Angriffsmodellierung}
+}
+
+\input{frame/angriffe}
+
+\section{Ergebnisse}
+
+\input{frame/ergebnisse}
+
+\section{Zusammenfassung}
+
+\input{frame/probleme}
+
+\input{frame/aussicht}
+
+\appendix
+\input{frame/literatur}
+
+\end{document}

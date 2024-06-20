@@ -1,0 +1,7 @@
+File,Run,Module,Name,
+Example-0.sca,Example-0-20200825-18:09:36-5396,Example.alice.eth[0].mac,rx channel utilization (%),4.8e-07
+Example-0.sca,Example-0-20200825-18:09:36-5396,Example.bob.eth[0].mac,rx channel utilization (%),0.00953358
+Example-0.sca,Example-0-20200825-18:09:36-5396,Example.eve.eth[0].mac,rx channel utilization (%),4.8e-07
+Example-0.sca,Example-0-20200825-18:09:36-5396,Example.router.eth[0].mac,rx channel utilization (%),0.00521358
+Example-0.sca,Example-0-20200825-18:09:36-5396,Example.router.eth[1].mac,rx channel utilization (%),4.8e-07
+Example-0.sca,Example-0-20200825-18:09:36-5396,Example.router.eth[2].mac,rx channel utilization (%),0.00432048

@@ -1,0 +1,61 @@
+\documentclass{standalone}
+\usepackage[usenames,dvipsnames,rgb]{xcolor}
+\usepackage{tikz}
+
+
+\begin{document}
+	\begin{tikzpicture}		
+		\node[] at (0, 1) (switch) {\begin{tabular}{c}
+				\includegraphics[width=16pt]{pic/top/switch}\\
+		\end{tabular}};
+	
+		\node[] at (3, -3) (alice) {\begin{tabular}{c}
+				\includegraphics[width=16pt]{pic/top/pc}\\
+				alice\\
+				1.1.1.1\\
+				00-$\dots$-01\
+		\end{tabular}};
+		\node[] at (0, -3) (bob) {\begin{tabular}{c}
+				\includegraphics[width=16pt]{pic/top/pc}\\
+				bob\\
+				1.1.1.2\\
+				00-$\dots$-02\
+		\end{tabular}};
+		\node[] at (-3, -3) (eve) {\begin{tabular}{c}
+				\includegraphics[width=16pt]{pic/top/laptop}\\
+				eve \\
+				1.1.1.3\\
+				00-$\dots$-03\\
+		\end{tabular}};
+	
+		\draw[] (switch) 
+		edge (alice)
+		edge (bob)
+		edge (eve);
+		
+		\only<1>{\path[draw,blue, ->] (alice) edge node[midway, sloped, above] {Anfrage} (switch);}
+		
+		\only<1>{
+		\path[draw,blue, ->] (switch) edge node[midway, sloped, above] {Anfrage} (bob);
+		\path[draw,blue, ->] (switch) edge node[midway, sloped, above] {Anfrage} (eve);
+		}
+	
+		\only<2>{
+			\path[draw,ForestGreen, ->] (bob) edge node[midway, sloped, above] {Antwort} (switch);
+		}
+	
+		\only<2>{
+			\path[draw,ForestGreen, ->] (switch) edge node[midway, sloped, above] {Antwort} (alice);
+		}
+	
+		\only<3>{
+			\path[draw,red, ->] (eve) edge node[midway, sloped, above] {Antwort} (switch);
+		}
+	
+		\only<3>{
+			\path[draw,red, ->] (switch) edge node[midway, sloped, above] {Antwort} (alice);
+		}
+		
+		
+	\end{tikzpicture}
+\end{document}

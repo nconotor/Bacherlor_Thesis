@@ -1,0 +1,36 @@
+\input{config/preamble}
+\input{config/glossarie}
+\makeindex
+
+\includeonly{
+	chapter/titelseite,
+	chapter/einleitung,
+	chapter/programme,
+	chapter/methodik,
+	chapter/simulation,
+	chapter/auswertung,
+	chapter/schluss,
+	chapter/appendices,
+}
+	
+\begin{document}
+	\include{chapter/titelseite}
+	\blankpage
+	\pagenumbering{roman}
+	\tableofcontents
+	\listoffigures
+	\lstlistoflistings
+	\listoftables
+	\cleardoublepage
+	\pagenumbering{arabic}
+	\include{chapter/einleitung} 
+	\include{chapter/programme}
+	\include{chapter/methodik}
+	\include{chapter/simulation}
+	\include{chapter/auswertung}
+	\include{chapter/schluss}
+	\include{chapter/appendices}
+
+	\printglossaries
+	\printbibliography[heading=bibintoc]
+\end{document}

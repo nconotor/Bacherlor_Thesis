@@ -1,0 +1,207 @@
+\documentclass[a4paper,11pt,oneside]{book}
+
+\usepackage{fontspec}
+\usepackage[table,xcdraw, svgnames, dvipsnames]{xcolor}
+
+\usepackage[a4paper,left=3.5cm,right=2.5cm,bottom=3.5cm,top=3cm]{geometry}
+
+\usepackage[ngerman]{babel}
+\selectlanguage{ngerman}
+\usepackage{hyperref}
+\usepackage{enumerate}
+\usepackage{standalone}
+\usepackage{bytefield}
+\usepackage{pdfpages}
+\usepackage[inkscapeformat=png]{svg}
+\usepackage{makecell, cellspace, caption}
+
+%
+% Linebreak für texttt
+%
+\usepackage[htt]{} 
+
+%
+% Tikz
+%
+\usepackage{tikz}
+\usetikzlibrary{arrows,decorations.pathmorphing,backgrounds,fit,positioning,shapes.symbols,chains,shapes.geometric,shapes.arrows,calc}
+
+%
+% Anhang
+%
+\usepackage[title]{appendix}
+\usepackage[texindy]{imakeidx}
+\usepackage[xindy, toc]{glossaries}
+\makeglossaries
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{csquotes}
+\usepackage[binary-units,per-mode=repeated-symbol]{siunitx}
+\sisetup{locale=DE}
+\DeclareSIUnit{\packets}{\ensuremath{p}}
+\usepackage[backend=biber]{biblatex}
+\addbibresource{../bib/source.bib}
+\usepackage[useregional]{datetime2}
+\usepackage{xspace}
+
+%
+% Definitionen
+% 
+\usepackage{amsthm}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+%
+% Listings 
+%
+\usepackage{listings}
+\renewcommand\lstlistlistingname{Quellcodeverzeichnis}
+
+\lstset
+{ 
+	basicstyle=\footnotesize,
+	numbers=left,
+	stepnumber=1,
+	showstringspaces=false,
+	tabsize=1,
+	breaklines=true,
+	breakatwhitespace=false,
+}
+
+\lstdefinelanguage{NED} {
+	morekeywords={allowunconnected,bool,channel,channelinterface,connections,const,
+		default,double,extends,false,for,gates,if,import,index,inout,input,
+		int,like,module,moduleinterface,network,output,package,parameters,
+		property,simple,sizeof,string,submodules,this,true,types,volatile,@display
+		xml,xmldoc},
+	sensitive=true,
+	morecomment=[l]{//},
+	morestring=[b]",
+}
+
+\lstdefinelanguage{INI} {
+	morekeywords={},
+	sensitive=true,
+	morecomment=[l]{\#},
+	morestring=[b]",
+}
+
+\lstdefinelanguage{ADL} {
+	morekeywords={var,retrieve,original,create,change,drop,send,filter,list,from,nodes,do,retrieve,packet,put,destroy},
+	sensitive=true,
+	morecomment=[l]{\#},
+	morestring=[b]",
+}
+
+%
+% Float Einstellungen
+%
+
+\usepackage{float}
+
+\floatstyle{ruled}
+\newfloat{program}{thp}{lop}
+\floatname{program}{Quellcode}
+
+%
+% TODO disable
+% Todos und Comments
+%
+%\usepackage[]{todonotes}
+
+
+
+%
+% Makros für Absätze und Seiten
+%
+
+\newcommand{\seite}[1]{Seite #1}
+\newcommand{\absatz}[1]{Absatz #1}
+\newcommand{\kapitel}[1]{Kapitel #1}
+
+
+\newcommand{\blankpage}{
+	\clearpage{\pagestyle{empty}\cleardoublepage}
+}
+
+%
+% Optionen aus den BA-Template der TU-Dortmund
+%
+
+% Keine einzelnen Zeilen beim Anfang eines Abschnitts (Schusterjungen)
+\clubpenalty = 10000
+% Keine einzelnen Zeilen am Ende eines Abschnitts (Hurenkinder)
+\widowpenalty = 10000 \displaywidowpenalty = 10000
+
+
+% URLs
+\usepackage{url}
+
+% Caption Packet
+\usepackage[margin=0pt,font=small,labelfont=bf]{caption}
+% Gliederung einstellen
+%\setcounter{secnumdepth}{5}
+%\setcounter{tocdepth}{5}
+
+\usepackage{subcaption}
+\usepackage{tablefootnote}
+\usepackage{tabularx}
+\usepackage{multirow}
+
+
+
+%
+% Custom commands
+%
+\newcommand{\ipAdress}[2]{\texttt{#1}/\texttt{#2}}
+\newcommand{\IpAdress}[1]{\texttt{#1}}
+\newcommand{\zB}{\mbox{z.\,B.}\xspace}
+\newcommand{\ua}{\mbox{u.\,a.}\xspace}
+
+\usepackage{listofitems}
+\setsepchar[?]{/||[||.}% SET THE CHARS TO SEARCH FOR
+\newcommand\HLtt[1]{%
+	\readlist\tmplist{#1}% FIND THE SEARCHED FOR CHARS (CALL IT n)
+	\def\tmp{}%
+	\foreachitem\x\in\tmplist[]{% CREATE A STRING OF n-1 TOKENS
+		\ifnum\xcnt=1\relax\else%
+		\expandafter\def\expandafter\tmp\expandafter{\tmp x}\fi}%
+	\def\tmpA{#1}%
+	\expandafter\expandafter\expandafter\texttt%
+	\expandafter\expandafter\expandafter{%
+		\expandafter\expandafter\expandafter\hl%
+		\expandafter\expandafter\expandafter{%
+			\expandafter\tmpA\tmp}}%
+}
+
+
+\renewcommand{\texttt}[1]{%
+	\begingroup
+	\ttfamily
+	\begingroup\lccode`~=`/\lowercase{\endgroup\def~}{/\discretionary{}{}{}}%
+	\begingroup\lccode`~=`[\lowercase{\endgroup\def~}{[\discretionary{}{}{}}%
+	\begingroup\lccode`~=`.\lowercase{\endgroup\def~}{.\discretionary{}{}{}}%
+	\catcode`/=\active\catcode`[=\active\catcode`.=\active
+	\scantokens{#1\noexpand}%
+	\endgroup
+}
+\usepackage{soul,xcolor}
+\usepackage{microtype}
+
+
+\newcommand{\ned}[1]{\sloppy\texttt{#1}}
+\newcommand{\ini}[1]{\sloppy\texttt{\textit{#1}}}
+\newcommand{\adl}[1]{\sloppy\textit{\textbf{#1}}}
+\newcommand{\csource}[1]{\sloppy\textbf{#1}}
+\newcommand{\file}[1]{\sloppy\textit{#1}}
+
+
+\renewcommand*{\glslinkcheckfirsthyperhook}{%
+	\ifglsused{\glslabel}%
+	{%
+		\setkeys{glslink}{hyper=false}%
+	}%
+	{}%
+}

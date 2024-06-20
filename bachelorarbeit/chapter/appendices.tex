@@ -1,0 +1,49 @@
+\begin{appendices}
+	\chapter{Ping-Test}\label{app:start}\label{app:pingData}
+	Ping ausgehend von \url{plutonium.cs.tu-dortmund.de} zu \url{8.8.8.8}.
+	\lstinputlisting[caption={[Ping-Testergebnisse]}]{listings/ping.txt}
+	
+	\chapter{\glsentryname{omnetpp}-Auslastung}\label{app:auslastung}
+	\begin{center}
+		\includegraphics[width=\textwidth,height=0.7\textheight,keepaspectratio]{pic/OmnetPerformance}
+	\end{center}
+	
+	\chapter{\glsentryname{omnetpp}-Zufallsverteilung}\label{app:zufallsverteilung}
+	\section{Konfiguration}
+	\begin{lstlisting}[language=INI, caption={[Erweiterte Durchläufe]}]
+[Config KeinAngriffNoAttack]
+extends = KeinAngriff
+description = "Simulation ohne Angriff"
+
+[Config KeinAngriffEmptyAttack]
+extends = KeinAngriff
+description = "Simulation ohne Angriff"
+**.attackConfigurationFile = "attacks/empty.xml"
+
+[Config KeinAngriffLateAttack]
+extends = KeinAngriff
+description = "Simulation ohne Angriff"
+**.attackConfigurationFile = "attacks/late.xml"
+	\end{lstlisting}
+	\section{Ergebnis}
+	\begin{center}
+		\includesvg[width=\linewidth, keepaspectratio,inkscapelatex=false]{pic/VergleichVerschiedeneAngriffe} 
+	\end{center}
+	\chapter{\glsentryname{asl}-Message-Typen} \label{app:aslMessageTypen}
+	\input{chapter/appendices/aslTypes}
+	
+	\chapter{Auswertungen}\label{app:ende}
+	\section{ARP}
+	\subsection{Summe der Bits im studentischen Bereich}\label{app:arpStudenten}
+	\begin{center}
+		\includesvg[width=\linewidth, keepaspectratio,inkscapelatex=false]{pic/arp/ARPAngriffStudenten} 
+	\end{center}
+	\subsection{Angefangene ARP-Auslösungen}\label{app:initArp}
+	\begin{center}
+			\includesvg[width=\linewidth, keepaspectratio,inkscapelatex=false]{pic/arp/InitArpServer} 
+	\end{center}
+	\section{DoS}\label{app:dosTotalBits}
+	\begin{center}
+			\includesvg[width=\linewidth,  keepaspectratio,inkscapelatex=false]{pic/dos/TotalBitsAlle}
+	\end{center}
+\end{appendices}

@@ -1,0 +1,15 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+
+\begin{document}
+	\begin{tikzpicture}
+		\path[->, thick] (-1, -1) edge node[midway, left] {t} (-1, -2);
+		
+		\path[draw] (0, -0.5) -- node[above, pos=0] {Sender} (0, -3.5);
+		\path[draw] (4, -0.5) -- node[above, pos=0] {Empfänger} (4, -3.5);
+		
+		\path[->] (0, -1) edge node[above, sloped] {ACK} (4, -2);
+		\path[<-] (0, -3) edge node[above, sloped] {RST} (4, -2);
+	\end{tikzpicture}
+\end{document}

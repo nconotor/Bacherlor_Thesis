@@ -1,0 +1,20 @@
+<config>
+	<interface among="**.ls1Host[*] irbRouter" address="129.217.1.x" />
+	<interface among="**.ls2Host[*] irbRouter" address="129.217.2.x" />
+	<interface among="**.ls4Host[*] irbRouter" address="129.217.3.x" />
+	<interface among="**.ls5Host[*] irbRouter" address="129.217.4.x" />
+	<interface among="**.ls6Host[*] irbRouter" address="129.217.5.x" />
+	<interface among="**.ls7Host[*] irbRouter" address="129.217.6.x" />
+	<interface among="**.ls8Host[*] irbRouter" address="129.217.7.x" />
+	<interface among="**.ls9Host[*] irbRouter" address="129.217.8.x" />
+	<interface among="**.ls11Host[*] irbRouter" address="129.217.9.x" />
+	<interface among="**.ls12Host[*] irbRouter" address="129.217.10.x" />
+	<interface among="**.ls13Host[*] irbRouter" address="129.217.11.x" />
+	<interface among="**.ls14Host[*] irbRouter" address="129.217.12.x" />
+	<interface among="**.irbServer[*] irbRouter" address="129.217.13.x" />
+	<interface among="**.studentHost[*] irbRouter" address="129.217.14.x" />
+	<interface among="irbRouter itmcRouter" address="129.217.15.x" />
+	<interface among="internet itmcRouter" address="10.0.0.x" />
+	<interface among="internet eve" address="11.0.0.x" />
+	<interface among="internet **.aliceServer[*]" address="12.0.0.x" />
+</config>

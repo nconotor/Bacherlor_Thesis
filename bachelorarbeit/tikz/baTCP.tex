@@ -1,0 +1,15 @@
+\documentclass[border={.5 .5 .5 2mm},]{standalone}
+\usepackage{tikz}
+\usepackage{bytefield}
+\begin{document}
+	\begin{bytefield}[endianness=little]{32}
+		\bitheader{0-31} \\
+		\bitbox{16}{Ursprungsport } & \bitbox{16}{Zielport } \\
+		\wordbox{1}{Sequenznummer} \\
+		\wordbox{1}{Bestätigungsnummer} \\
+		\bitbox{4}{\tiny Daten Offset } & \bitbox{4}{\tiny Reserviert } & \bitbox{1}{\tiny C\\W\\R }  & \bitbox{1}{\tiny E\\C\\E } & \bitbox{1}{\tiny U\\R\\G } & \bitbox{1}{\tiny A\\C\\K } & \bitbox{1}{\tiny P\\S\\H } & \bitbox{1}{\tiny R\\S\\T }  & \bitbox{1}{\tiny S\\Y\\N } & \bitbox{1}{\tiny F\\I\\N } & \bitbox{16}{Fenster }\\
+		\bitbox{16}{Prüfsumme} & \bitbox{16}{Urgent Pointer}\\
+		\bitbox{24}{Optionen} & \bitbox{8}{Padding}\\
+		\wordbox{1}{Daten} \\
+	\end{bytefield}
+\end{document}

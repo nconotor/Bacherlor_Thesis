@@ -1,0 +1,5 @@
+<internetCloud symmetric="true">
+  <parameters >
+    <traffic src="TuCsNet.*" dest="TuCsNet.*" delay="5ms + truncnormal(10ms,10ms)"  datarate="100Gbps"  drop="uniform(0, 10000) &lt; 1" />
+  </parameters>
+</internetCloud>

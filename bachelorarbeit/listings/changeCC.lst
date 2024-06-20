@@ -1,0 +1,11 @@
+...
+else if (fieldName == "srcMACAddress" && packetClassName == "ARPPacket") {
+	if (isRandom) {
+		(check_and_cast<ARPPacket*> (encapsulatedPacket))->setSrcMACAddress(MACAddress(stoull(value)));
+	}
+	else {
+		(check_and_cast<ARPPacket*> (encapsulatedPacket))->setSrcMACAddress(MACAddress(value.c_str()));
+	}
+}
+...
+

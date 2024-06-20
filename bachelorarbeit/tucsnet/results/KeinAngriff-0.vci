@@ -1,0 +1,1921 @@
+                                                                
+version 2
+run KeinAngriff-0-20201118-16:06:04-81935
+attr configname KeinAngriff
+attr datetime 20201118-16:06:04
+attr experiment KeinAngriff
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvars2 $repetition=0
+attr measurement ""
+attr network TuCsNet
+attr processid 81935
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+
+vector 481  TuCsNet.switchIrb.ethg$o[0].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 483  TuCsNet.switchIrb.ethg$o[1].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 485  TuCsNet.switchIrb.ethg$o[2].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 487  TuCsNet.switchIrb.ethg$o[3].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 489  TuCsNet.switchIrb.ethg$o[4].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 491  TuCsNet.switchIrb.ethg$o[5].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 493  TuCsNet.switchIrb.ethg$o[6].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 495  TuCsNet.switchIrb.ethg$o[7].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 497  TuCsNet.switchIrb.ethg$o[8].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 499  TuCsNet.switchIrb.ethg$o[9].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 600  TuCsNet.switchIrb.ethg$o[10].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 480  TuCsNet.irbServer[0].ethg$o[0].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 482  TuCsNet.irbServer[1].ethg$o[0].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 484  TuCsNet.irbServer[2].ethg$o[0].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 486  TuCsNet.irbServer[3].ethg$o[0].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 488  TuCsNet.irbServer[4].ethg$o[0].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 490  TuCsNet.irbServer[5].ethg$o[0].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 492  TuCsNet.irbServer[6].ethg$o[0].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 494  TuCsNet.irbServer[7].ethg$o[0].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 496  TuCsNet.irbServer[8].ethg$o[0].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 498  TuCsNet.irbServer[9].ethg$o[0].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 500  TuCsNet.switchStudent.ethg$o[0].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 501  TuCsNet.switchStudent.ethg$o[1].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 502  TuCsNet.switchStudent.ethg$o[2].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 503  TuCsNet.switchStudent.ethg$o[3].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 504  TuCsNet.switchStudent.ethg$o[4].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 505  TuCsNet.switchStudent.ethg$o[5].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 506  TuCsNet.switchStudent.ethg$o[6].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 507  TuCsNet.switchStudent.ethg$o[7].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 508  TuCsNet.switchStudent.ethg$o[8].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 509  TuCsNet.switchStudent.ethg$o[9].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 510  TuCsNet.switchStudent.ethg$o[10].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 511  TuCsNet.switchStudent.ethg$o[11].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 512  TuCsNet.switchStudent.ethg$o[12].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 513  TuCsNet.switchStudent.ethg$o[13].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 514  TuCsNet.switchStudent.ethg$o[14].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 515  TuCsNet.switchStudent.ethg$o[15].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 516  TuCsNet.switchStudent.ethg$o[16].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 517  TuCsNet.switchStudent.ethg$o[17].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 518  TuCsNet.switchStudent.ethg$o[18].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 519  TuCsNet.switchStudent.ethg$o[19].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 520  TuCsNet.switchStudent.ethg$o[20].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 521  TuCsNet.switchStudent.ethg$o[21].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 522  TuCsNet.switchStudent.ethg$o[22].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 523  TuCsNet.switchStudent.ethg$o[23].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 524  TuCsNet.switchStudent.ethg$o[24].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 525  TuCsNet.switchStudent.ethg$o[25].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 526  TuCsNet.switchStudent.ethg$o[26].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 527  TuCsNet.switchStudent.ethg$o[27].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 528  TuCsNet.switchStudent.ethg$o[28].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 529  TuCsNet.switchStudent.ethg$o[29].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 530  TuCsNet.switchStudent.ethg$o[30].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 531  TuCsNet.switchStudent.ethg$o[31].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 532  TuCsNet.switchStudent.ethg$o[32].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 533  TuCsNet.switchStudent.ethg$o[33].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 534  TuCsNet.switchStudent.ethg$o[34].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 535  TuCsNet.switchStudent.ethg$o[35].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 536  TuCsNet.switchStudent.ethg$o[36].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 537  TuCsNet.switchStudent.ethg$o[37].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 538  TuCsNet.switchStudent.ethg$o[38].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 539  TuCsNet.switchStudent.ethg$o[39].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 540  TuCsNet.switchStudent.ethg$o[40].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 541  TuCsNet.switchStudent.ethg$o[41].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 542  TuCsNet.switchStudent.ethg$o[42].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 543  TuCsNet.switchStudent.ethg$o[43].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 544  TuCsNet.switchStudent.ethg$o[44].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 545  TuCsNet.switchStudent.ethg$o[45].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 546  TuCsNet.switchStudent.ethg$o[46].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 547  TuCsNet.switchStudent.ethg$o[47].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 548  TuCsNet.switchStudent.ethg$o[48].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 549  TuCsNet.switchStudent.ethg$o[49].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 550  TuCsNet.switchStudent.ethg$o[50].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 551  TuCsNet.switchStudent.ethg$o[51].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 552  TuCsNet.switchStudent.ethg$o[52].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 553  TuCsNet.switchStudent.ethg$o[53].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 554  TuCsNet.switchStudent.ethg$o[54].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 555  TuCsNet.switchStudent.ethg$o[55].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 556  TuCsNet.switchStudent.ethg$o[56].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 557  TuCsNet.switchStudent.ethg$o[57].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 558  TuCsNet.switchStudent.ethg$o[58].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 559  TuCsNet.switchStudent.ethg$o[59].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 560  TuCsNet.switchStudent.ethg$o[60].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 561  TuCsNet.switchStudent.ethg$o[61].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 562  TuCsNet.switchStudent.ethg$o[62].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 563  TuCsNet.switchStudent.ethg$o[63].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 564  TuCsNet.switchStudent.ethg$o[64].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 565  TuCsNet.switchStudent.ethg$o[65].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 566  TuCsNet.switchStudent.ethg$o[66].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 567  TuCsNet.switchStudent.ethg$o[67].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 568  TuCsNet.switchStudent.ethg$o[68].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 569  TuCsNet.switchStudent.ethg$o[69].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 570  TuCsNet.switchStudent.ethg$o[70].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 571  TuCsNet.switchStudent.ethg$o[71].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 572  TuCsNet.switchStudent.ethg$o[72].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 573  TuCsNet.switchStudent.ethg$o[73].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 574  TuCsNet.switchStudent.ethg$o[74].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 575  TuCsNet.switchStudent.ethg$o[75].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 576  TuCsNet.switchStudent.ethg$o[76].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 577  TuCsNet.switchStudent.ethg$o[77].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 578  TuCsNet.switchStudent.ethg$o[78].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 579  TuCsNet.switchStudent.ethg$o[79].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 580  TuCsNet.switchStudent.ethg$o[80].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 581  TuCsNet.switchStudent.ethg$o[81].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 582  TuCsNet.switchStudent.ethg$o[82].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 583  TuCsNet.switchStudent.ethg$o[83].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 584  TuCsNet.switchStudent.ethg$o[84].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 585  TuCsNet.switchStudent.ethg$o[85].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 586  TuCsNet.switchStudent.ethg$o[86].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 587  TuCsNet.switchStudent.ethg$o[87].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 588  TuCsNet.switchStudent.ethg$o[88].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 589  TuCsNet.switchStudent.ethg$o[89].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 590  TuCsNet.switchStudent.ethg$o[90].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 591  TuCsNet.switchStudent.ethg$o[91].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 592  TuCsNet.switchStudent.ethg$o[92].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 593  TuCsNet.switchStudent.ethg$o[93].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 594  TuCsNet.switchStudent.ethg$o[94].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 595  TuCsNet.switchStudent.ethg$o[95].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 596  TuCsNet.switchStudent.ethg$o[96].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 597  TuCsNet.switchStudent.ethg$o[97].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 598  TuCsNet.switchStudent.ethg$o[98].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 599  TuCsNet.switchStudent.ethg$o[99].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 602  TuCsNet.switchStudent.ethg$o[100].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 0  TuCsNet.switchLs1.ethg$o[0].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 1  TuCsNet.switchLs1.ethg$o[1].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 2  TuCsNet.switchLs1.ethg$o[2].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 3  TuCsNet.switchLs1.ethg$o[3].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 4  TuCsNet.switchLs1.ethg$o[4].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 5  TuCsNet.switchLs1.ethg$o[5].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 6  TuCsNet.switchLs1.ethg$o[6].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 7  TuCsNet.switchLs1.ethg$o[7].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 8  TuCsNet.switchLs1.ethg$o[8].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 9  TuCsNet.switchLs1.ethg$o[9].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 10  TuCsNet.switchLs1.ethg$o[10].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 11  TuCsNet.switchLs1.ethg$o[11].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 12  TuCsNet.switchLs1.ethg$o[12].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 13  TuCsNet.switchLs1.ethg$o[13].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 14  TuCsNet.switchLs1.ethg$o[14].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 15  TuCsNet.switchLs1.ethg$o[15].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 16  TuCsNet.switchLs1.ethg$o[16].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 17  TuCsNet.switchLs1.ethg$o[17].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 18  TuCsNet.switchLs1.ethg$o[18].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 19  TuCsNet.switchLs1.ethg$o[19].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 20  TuCsNet.switchLs1.ethg$o[20].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 21  TuCsNet.switchLs1.ethg$o[21].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 22  TuCsNet.switchLs1.ethg$o[22].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 23  TuCsNet.switchLs1.ethg$o[23].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 24  TuCsNet.switchLs1.ethg$o[24].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 25  TuCsNet.switchLs1.ethg$o[25].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 26  TuCsNet.switchLs1.ethg$o[26].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 27  TuCsNet.switchLs1.ethg$o[27].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 28  TuCsNet.switchLs1.ethg$o[28].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 29  TuCsNet.switchLs1.ethg$o[29].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 30  TuCsNet.switchLs1.ethg$o[30].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 31  TuCsNet.switchLs1.ethg$o[31].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 32  TuCsNet.switchLs1.ethg$o[32].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 33  TuCsNet.switchLs1.ethg$o[33].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 34  TuCsNet.switchLs1.ethg$o[34].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 35  TuCsNet.switchLs1.ethg$o[35].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 36  TuCsNet.switchLs1.ethg$o[36].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 37  TuCsNet.switchLs1.ethg$o[37].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 38  TuCsNet.switchLs1.ethg$o[38].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 39  TuCsNet.switchLs1.ethg$o[39].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 604  TuCsNet.switchLs1.ethg$o[40].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 40  TuCsNet.switchLs2.ethg$o[0].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 41  TuCsNet.switchLs2.ethg$o[1].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 42  TuCsNet.switchLs2.ethg$o[2].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 43  TuCsNet.switchLs2.ethg$o[3].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 44  TuCsNet.switchLs2.ethg$o[4].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 45  TuCsNet.switchLs2.ethg$o[5].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 46  TuCsNet.switchLs2.ethg$o[6].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 47  TuCsNet.switchLs2.ethg$o[7].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 48  TuCsNet.switchLs2.ethg$o[8].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 49  TuCsNet.switchLs2.ethg$o[9].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 50  TuCsNet.switchLs2.ethg$o[10].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 51  TuCsNet.switchLs2.ethg$o[11].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 52  TuCsNet.switchLs2.ethg$o[12].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 53  TuCsNet.switchLs2.ethg$o[13].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 54  TuCsNet.switchLs2.ethg$o[14].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 55  TuCsNet.switchLs2.ethg$o[15].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 56  TuCsNet.switchLs2.ethg$o[16].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 57  TuCsNet.switchLs2.ethg$o[17].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 58  TuCsNet.switchLs2.ethg$o[18].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 59  TuCsNet.switchLs2.ethg$o[19].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 60  TuCsNet.switchLs2.ethg$o[20].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 61  TuCsNet.switchLs2.ethg$o[21].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 62  TuCsNet.switchLs2.ethg$o[22].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 63  TuCsNet.switchLs2.ethg$o[23].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 64  TuCsNet.switchLs2.ethg$o[24].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 65  TuCsNet.switchLs2.ethg$o[25].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 66  TuCsNet.switchLs2.ethg$o[26].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 67  TuCsNet.switchLs2.ethg$o[27].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 68  TuCsNet.switchLs2.ethg$o[28].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 69  TuCsNet.switchLs2.ethg$o[29].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 70  TuCsNet.switchLs2.ethg$o[30].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 71  TuCsNet.switchLs2.ethg$o[31].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 72  TuCsNet.switchLs2.ethg$o[32].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 73  TuCsNet.switchLs2.ethg$o[33].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 74  TuCsNet.switchLs2.ethg$o[34].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 75  TuCsNet.switchLs2.ethg$o[35].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 76  TuCsNet.switchLs2.ethg$o[36].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 77  TuCsNet.switchLs2.ethg$o[37].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 78  TuCsNet.switchLs2.ethg$o[38].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 79  TuCsNet.switchLs2.ethg$o[39].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 606  TuCsNet.switchLs2.ethg$o[40].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 80  TuCsNet.switchLs4.ethg$o[0].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 81  TuCsNet.switchLs4.ethg$o[1].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 82  TuCsNet.switchLs4.ethg$o[2].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 83  TuCsNet.switchLs4.ethg$o[3].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 84  TuCsNet.switchLs4.ethg$o[4].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 85  TuCsNet.switchLs4.ethg$o[5].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 86  TuCsNet.switchLs4.ethg$o[6].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 87  TuCsNet.switchLs4.ethg$o[7].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 88  TuCsNet.switchLs4.ethg$o[8].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 89  TuCsNet.switchLs4.ethg$o[9].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 90  TuCsNet.switchLs4.ethg$o[10].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 91  TuCsNet.switchLs4.ethg$o[11].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 92  TuCsNet.switchLs4.ethg$o[12].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 93  TuCsNet.switchLs4.ethg$o[13].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 94  TuCsNet.switchLs4.ethg$o[14].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 95  TuCsNet.switchLs4.ethg$o[15].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 96  TuCsNet.switchLs4.ethg$o[16].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 97  TuCsNet.switchLs4.ethg$o[17].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 98  TuCsNet.switchLs4.ethg$o[18].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 99  TuCsNet.switchLs4.ethg$o[19].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 100  TuCsNet.switchLs4.ethg$o[20].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 101  TuCsNet.switchLs4.ethg$o[21].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 102  TuCsNet.switchLs4.ethg$o[22].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 103  TuCsNet.switchLs4.ethg$o[23].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 104  TuCsNet.switchLs4.ethg$o[24].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 105  TuCsNet.switchLs4.ethg$o[25].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 106  TuCsNet.switchLs4.ethg$o[26].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 107  TuCsNet.switchLs4.ethg$o[27].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 108  TuCsNet.switchLs4.ethg$o[28].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 109  TuCsNet.switchLs4.ethg$o[29].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 110  TuCsNet.switchLs4.ethg$o[30].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 111  TuCsNet.switchLs4.ethg$o[31].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 112  TuCsNet.switchLs4.ethg$o[32].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 113  TuCsNet.switchLs4.ethg$o[33].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 114  TuCsNet.switchLs4.ethg$o[34].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 115  TuCsNet.switchLs4.ethg$o[35].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 116  TuCsNet.switchLs4.ethg$o[36].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 117  TuCsNet.switchLs4.ethg$o[37].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 118  TuCsNet.switchLs4.ethg$o[38].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 119  TuCsNet.switchLs4.ethg$o[39].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 608  TuCsNet.switchLs4.ethg$o[40].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 120  TuCsNet.switchLs5.ethg$o[0].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 121  TuCsNet.switchLs5.ethg$o[1].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 122  TuCsNet.switchLs5.ethg$o[2].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 123  TuCsNet.switchLs5.ethg$o[3].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 124  TuCsNet.switchLs5.ethg$o[4].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 125  TuCsNet.switchLs5.ethg$o[5].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 126  TuCsNet.switchLs5.ethg$o[6].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 127  TuCsNet.switchLs5.ethg$o[7].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 128  TuCsNet.switchLs5.ethg$o[8].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 129  TuCsNet.switchLs5.ethg$o[9].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 130  TuCsNet.switchLs5.ethg$o[10].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 131  TuCsNet.switchLs5.ethg$o[11].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 132  TuCsNet.switchLs5.ethg$o[12].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 133  TuCsNet.switchLs5.ethg$o[13].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 134  TuCsNet.switchLs5.ethg$o[14].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 135  TuCsNet.switchLs5.ethg$o[15].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 136  TuCsNet.switchLs5.ethg$o[16].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 137  TuCsNet.switchLs5.ethg$o[17].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 138  TuCsNet.switchLs5.ethg$o[18].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 139  TuCsNet.switchLs5.ethg$o[19].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 140  TuCsNet.switchLs5.ethg$o[20].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 141  TuCsNet.switchLs5.ethg$o[21].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 142  TuCsNet.switchLs5.ethg$o[22].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 143  TuCsNet.switchLs5.ethg$o[23].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 144  TuCsNet.switchLs5.ethg$o[24].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 145  TuCsNet.switchLs5.ethg$o[25].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 146  TuCsNet.switchLs5.ethg$o[26].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 147  TuCsNet.switchLs5.ethg$o[27].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 148  TuCsNet.switchLs5.ethg$o[28].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 149  TuCsNet.switchLs5.ethg$o[29].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 150  TuCsNet.switchLs5.ethg$o[30].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 151  TuCsNet.switchLs5.ethg$o[31].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 152  TuCsNet.switchLs5.ethg$o[32].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 153  TuCsNet.switchLs5.ethg$o[33].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 154  TuCsNet.switchLs5.ethg$o[34].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 155  TuCsNet.switchLs5.ethg$o[35].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 156  TuCsNet.switchLs5.ethg$o[36].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 157  TuCsNet.switchLs5.ethg$o[37].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 158  TuCsNet.switchLs5.ethg$o[38].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 159  TuCsNet.switchLs5.ethg$o[39].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 610  TuCsNet.switchLs5.ethg$o[40].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 160  TuCsNet.switchLs6.ethg$o[0].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 161  TuCsNet.switchLs6.ethg$o[1].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 162  TuCsNet.switchLs6.ethg$o[2].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 163  TuCsNet.switchLs6.ethg$o[3].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 164  TuCsNet.switchLs6.ethg$o[4].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 165  TuCsNet.switchLs6.ethg$o[5].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 166  TuCsNet.switchLs6.ethg$o[6].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 167  TuCsNet.switchLs6.ethg$o[7].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 168  TuCsNet.switchLs6.ethg$o[8].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 169  TuCsNet.switchLs6.ethg$o[9].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 170  TuCsNet.switchLs6.ethg$o[10].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 171  TuCsNet.switchLs6.ethg$o[11].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 172  TuCsNet.switchLs6.ethg$o[12].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 173  TuCsNet.switchLs6.ethg$o[13].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 174  TuCsNet.switchLs6.ethg$o[14].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 175  TuCsNet.switchLs6.ethg$o[15].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 176  TuCsNet.switchLs6.ethg$o[16].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 177  TuCsNet.switchLs6.ethg$o[17].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 178  TuCsNet.switchLs6.ethg$o[18].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 179  TuCsNet.switchLs6.ethg$o[19].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 180  TuCsNet.switchLs6.ethg$o[20].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 181  TuCsNet.switchLs6.ethg$o[21].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 182  TuCsNet.switchLs6.ethg$o[22].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 183  TuCsNet.switchLs6.ethg$o[23].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 184  TuCsNet.switchLs6.ethg$o[24].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 185  TuCsNet.switchLs6.ethg$o[25].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 186  TuCsNet.switchLs6.ethg$o[26].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 187  TuCsNet.switchLs6.ethg$o[27].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 188  TuCsNet.switchLs6.ethg$o[28].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 189  TuCsNet.switchLs6.ethg$o[29].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 190  TuCsNet.switchLs6.ethg$o[30].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 191  TuCsNet.switchLs6.ethg$o[31].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 192  TuCsNet.switchLs6.ethg$o[32].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 193  TuCsNet.switchLs6.ethg$o[33].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 194  TuCsNet.switchLs6.ethg$o[34].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 195  TuCsNet.switchLs6.ethg$o[35].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 196  TuCsNet.switchLs6.ethg$o[36].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 197  TuCsNet.switchLs6.ethg$o[37].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 198  TuCsNet.switchLs6.ethg$o[38].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 199  TuCsNet.switchLs6.ethg$o[39].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 612  TuCsNet.switchLs6.ethg$o[40].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 200  TuCsNet.switchLs7.ethg$o[0].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 201  TuCsNet.switchLs7.ethg$o[1].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 202  TuCsNet.switchLs7.ethg$o[2].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 203  TuCsNet.switchLs7.ethg$o[3].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 204  TuCsNet.switchLs7.ethg$o[4].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 205  TuCsNet.switchLs7.ethg$o[5].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 206  TuCsNet.switchLs7.ethg$o[6].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 207  TuCsNet.switchLs7.ethg$o[7].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 208  TuCsNet.switchLs7.ethg$o[8].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 209  TuCsNet.switchLs7.ethg$o[9].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 210  TuCsNet.switchLs7.ethg$o[10].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 211  TuCsNet.switchLs7.ethg$o[11].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 212  TuCsNet.switchLs7.ethg$o[12].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 213  TuCsNet.switchLs7.ethg$o[13].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 214  TuCsNet.switchLs7.ethg$o[14].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 215  TuCsNet.switchLs7.ethg$o[15].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 216  TuCsNet.switchLs7.ethg$o[16].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 217  TuCsNet.switchLs7.ethg$o[17].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 218  TuCsNet.switchLs7.ethg$o[18].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 219  TuCsNet.switchLs7.ethg$o[19].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 220  TuCsNet.switchLs7.ethg$o[20].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 221  TuCsNet.switchLs7.ethg$o[21].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 222  TuCsNet.switchLs7.ethg$o[22].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 223  TuCsNet.switchLs7.ethg$o[23].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 224  TuCsNet.switchLs7.ethg$o[24].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 225  TuCsNet.switchLs7.ethg$o[25].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 226  TuCsNet.switchLs7.ethg$o[26].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 227  TuCsNet.switchLs7.ethg$o[27].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 228  TuCsNet.switchLs7.ethg$o[28].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 229  TuCsNet.switchLs7.ethg$o[29].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 230  TuCsNet.switchLs7.ethg$o[30].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 231  TuCsNet.switchLs7.ethg$o[31].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 232  TuCsNet.switchLs7.ethg$o[32].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 233  TuCsNet.switchLs7.ethg$o[33].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 234  TuCsNet.switchLs7.ethg$o[34].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 235  TuCsNet.switchLs7.ethg$o[35].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 236  TuCsNet.switchLs7.ethg$o[36].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 237  TuCsNet.switchLs7.ethg$o[37].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 238  TuCsNet.switchLs7.ethg$o[38].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 239  TuCsNet.switchLs7.ethg$o[39].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 614  TuCsNet.switchLs7.ethg$o[40].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 240  TuCsNet.switchLs8.ethg$o[0].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 241  TuCsNet.switchLs8.ethg$o[1].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 242  TuCsNet.switchLs8.ethg$o[2].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 243  TuCsNet.switchLs8.ethg$o[3].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 244  TuCsNet.switchLs8.ethg$o[4].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 245  TuCsNet.switchLs8.ethg$o[5].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 246  TuCsNet.switchLs8.ethg$o[6].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 247  TuCsNet.switchLs8.ethg$o[7].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 248  TuCsNet.switchLs8.ethg$o[8].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 249  TuCsNet.switchLs8.ethg$o[9].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 250  TuCsNet.switchLs8.ethg$o[10].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 251  TuCsNet.switchLs8.ethg$o[11].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 252  TuCsNet.switchLs8.ethg$o[12].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 253  TuCsNet.switchLs8.ethg$o[13].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 254  TuCsNet.switchLs8.ethg$o[14].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 255  TuCsNet.switchLs8.ethg$o[15].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 256  TuCsNet.switchLs8.ethg$o[16].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 257  TuCsNet.switchLs8.ethg$o[17].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 258  TuCsNet.switchLs8.ethg$o[18].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 259  TuCsNet.switchLs8.ethg$o[19].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 260  TuCsNet.switchLs8.ethg$o[20].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 261  TuCsNet.switchLs8.ethg$o[21].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 262  TuCsNet.switchLs8.ethg$o[22].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 263  TuCsNet.switchLs8.ethg$o[23].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 264  TuCsNet.switchLs8.ethg$o[24].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 265  TuCsNet.switchLs8.ethg$o[25].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 266  TuCsNet.switchLs8.ethg$o[26].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 267  TuCsNet.switchLs8.ethg$o[27].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 268  TuCsNet.switchLs8.ethg$o[28].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 269  TuCsNet.switchLs8.ethg$o[29].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 270  TuCsNet.switchLs8.ethg$o[30].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 271  TuCsNet.switchLs8.ethg$o[31].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 272  TuCsNet.switchLs8.ethg$o[32].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 273  TuCsNet.switchLs8.ethg$o[33].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 274  TuCsNet.switchLs8.ethg$o[34].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 275  TuCsNet.switchLs8.ethg$o[35].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 276  TuCsNet.switchLs8.ethg$o[36].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 277  TuCsNet.switchLs8.ethg$o[37].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 278  TuCsNet.switchLs8.ethg$o[38].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 279  TuCsNet.switchLs8.ethg$o[39].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 616  TuCsNet.switchLs8.ethg$o[40].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 280  TuCsNet.switchLs9.ethg$o[0].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 281  TuCsNet.switchLs9.ethg$o[1].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 282  TuCsNet.switchLs9.ethg$o[2].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 283  TuCsNet.switchLs9.ethg$o[3].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 284  TuCsNet.switchLs9.ethg$o[4].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 285  TuCsNet.switchLs9.ethg$o[5].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 286  TuCsNet.switchLs9.ethg$o[6].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 287  TuCsNet.switchLs9.ethg$o[7].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 288  TuCsNet.switchLs9.ethg$o[8].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 289  TuCsNet.switchLs9.ethg$o[9].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 290  TuCsNet.switchLs9.ethg$o[10].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 291  TuCsNet.switchLs9.ethg$o[11].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 292  TuCsNet.switchLs9.ethg$o[12].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 293  TuCsNet.switchLs9.ethg$o[13].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 294  TuCsNet.switchLs9.ethg$o[14].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 295  TuCsNet.switchLs9.ethg$o[15].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 296  TuCsNet.switchLs9.ethg$o[16].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 297  TuCsNet.switchLs9.ethg$o[17].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 298  TuCsNet.switchLs9.ethg$o[18].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 299  TuCsNet.switchLs9.ethg$o[19].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 300  TuCsNet.switchLs9.ethg$o[20].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 301  TuCsNet.switchLs9.ethg$o[21].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 302  TuCsNet.switchLs9.ethg$o[22].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 303  TuCsNet.switchLs9.ethg$o[23].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 304  TuCsNet.switchLs9.ethg$o[24].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 305  TuCsNet.switchLs9.ethg$o[25].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 306  TuCsNet.switchLs9.ethg$o[26].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 307  TuCsNet.switchLs9.ethg$o[27].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 308  TuCsNet.switchLs9.ethg$o[28].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 309  TuCsNet.switchLs9.ethg$o[29].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 310  TuCsNet.switchLs9.ethg$o[30].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 311  TuCsNet.switchLs9.ethg$o[31].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 312  TuCsNet.switchLs9.ethg$o[32].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 313  TuCsNet.switchLs9.ethg$o[33].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 314  TuCsNet.switchLs9.ethg$o[34].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 315  TuCsNet.switchLs9.ethg$o[35].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 316  TuCsNet.switchLs9.ethg$o[36].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 317  TuCsNet.switchLs9.ethg$o[37].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 318  TuCsNet.switchLs9.ethg$o[38].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 319  TuCsNet.switchLs9.ethg$o[39].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 618  TuCsNet.switchLs9.ethg$o[40].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 320  TuCsNet.switchLs11.ethg$o[0].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 321  TuCsNet.switchLs11.ethg$o[1].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 322  TuCsNet.switchLs11.ethg$o[2].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 323  TuCsNet.switchLs11.ethg$o[3].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 324  TuCsNet.switchLs11.ethg$o[4].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 325  TuCsNet.switchLs11.ethg$o[5].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 326  TuCsNet.switchLs11.ethg$o[6].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 327  TuCsNet.switchLs11.ethg$o[7].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 328  TuCsNet.switchLs11.ethg$o[8].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 329  TuCsNet.switchLs11.ethg$o[9].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 330  TuCsNet.switchLs11.ethg$o[10].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 331  TuCsNet.switchLs11.ethg$o[11].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 332  TuCsNet.switchLs11.ethg$o[12].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 333  TuCsNet.switchLs11.ethg$o[13].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 334  TuCsNet.switchLs11.ethg$o[14].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 335  TuCsNet.switchLs11.ethg$o[15].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 336  TuCsNet.switchLs11.ethg$o[16].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 337  TuCsNet.switchLs11.ethg$o[17].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 338  TuCsNet.switchLs11.ethg$o[18].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 339  TuCsNet.switchLs11.ethg$o[19].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 340  TuCsNet.switchLs11.ethg$o[20].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 341  TuCsNet.switchLs11.ethg$o[21].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 342  TuCsNet.switchLs11.ethg$o[22].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 343  TuCsNet.switchLs11.ethg$o[23].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 344  TuCsNet.switchLs11.ethg$o[24].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 345  TuCsNet.switchLs11.ethg$o[25].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 346  TuCsNet.switchLs11.ethg$o[26].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 347  TuCsNet.switchLs11.ethg$o[27].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 348  TuCsNet.switchLs11.ethg$o[28].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 349  TuCsNet.switchLs11.ethg$o[29].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 350  TuCsNet.switchLs11.ethg$o[30].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 351  TuCsNet.switchLs11.ethg$o[31].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 352  TuCsNet.switchLs11.ethg$o[32].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 353  TuCsNet.switchLs11.ethg$o[33].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 354  TuCsNet.switchLs11.ethg$o[34].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 355  TuCsNet.switchLs11.ethg$o[35].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 356  TuCsNet.switchLs11.ethg$o[36].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 357  TuCsNet.switchLs11.ethg$o[37].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 358  TuCsNet.switchLs11.ethg$o[38].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 359  TuCsNet.switchLs11.ethg$o[39].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 620  TuCsNet.switchLs11.ethg$o[40].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 360  TuCsNet.switchLs12.ethg$o[0].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 361  TuCsNet.switchLs12.ethg$o[1].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 362  TuCsNet.switchLs12.ethg$o[2].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 363  TuCsNet.switchLs12.ethg$o[3].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 364  TuCsNet.switchLs12.ethg$o[4].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 365  TuCsNet.switchLs12.ethg$o[5].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 366  TuCsNet.switchLs12.ethg$o[6].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 367  TuCsNet.switchLs12.ethg$o[7].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 368  TuCsNet.switchLs12.ethg$o[8].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 369  TuCsNet.switchLs12.ethg$o[9].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 370  TuCsNet.switchLs12.ethg$o[10].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 371  TuCsNet.switchLs12.ethg$o[11].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 372  TuCsNet.switchLs12.ethg$o[12].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 373  TuCsNet.switchLs12.ethg$o[13].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 374  TuCsNet.switchLs12.ethg$o[14].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 375  TuCsNet.switchLs12.ethg$o[15].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 376  TuCsNet.switchLs12.ethg$o[16].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 377  TuCsNet.switchLs12.ethg$o[17].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 378  TuCsNet.switchLs12.ethg$o[18].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 379  TuCsNet.switchLs12.ethg$o[19].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 380  TuCsNet.switchLs12.ethg$o[20].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 381  TuCsNet.switchLs12.ethg$o[21].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 382  TuCsNet.switchLs12.ethg$o[22].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 383  TuCsNet.switchLs12.ethg$o[23].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 384  TuCsNet.switchLs12.ethg$o[24].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 385  TuCsNet.switchLs12.ethg$o[25].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 386  TuCsNet.switchLs12.ethg$o[26].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 387  TuCsNet.switchLs12.ethg$o[27].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 388  TuCsNet.switchLs12.ethg$o[28].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 389  TuCsNet.switchLs12.ethg$o[29].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 390  TuCsNet.switchLs12.ethg$o[30].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 391  TuCsNet.switchLs12.ethg$o[31].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 392  TuCsNet.switchLs12.ethg$o[32].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 393  TuCsNet.switchLs12.ethg$o[33].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 394  TuCsNet.switchLs12.ethg$o[34].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 395  TuCsNet.switchLs12.ethg$o[35].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 396  TuCsNet.switchLs12.ethg$o[36].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 397  TuCsNet.switchLs12.ethg$o[37].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 398  TuCsNet.switchLs12.ethg$o[38].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 399  TuCsNet.switchLs12.ethg$o[39].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 622  TuCsNet.switchLs12.ethg$o[40].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 400  TuCsNet.switchLs13.ethg$o[0].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 401  TuCsNet.switchLs13.ethg$o[1].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 402  TuCsNet.switchLs13.ethg$o[2].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 403  TuCsNet.switchLs13.ethg$o[3].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 404  TuCsNet.switchLs13.ethg$o[4].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 405  TuCsNet.switchLs13.ethg$o[5].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 406  TuCsNet.switchLs13.ethg$o[6].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 407  TuCsNet.switchLs13.ethg$o[7].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 408  TuCsNet.switchLs13.ethg$o[8].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 409  TuCsNet.switchLs13.ethg$o[9].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 410  TuCsNet.switchLs13.ethg$o[10].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 411  TuCsNet.switchLs13.ethg$o[11].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 412  TuCsNet.switchLs13.ethg$o[12].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 413  TuCsNet.switchLs13.ethg$o[13].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 414  TuCsNet.switchLs13.ethg$o[14].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 415  TuCsNet.switchLs13.ethg$o[15].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 416  TuCsNet.switchLs13.ethg$o[16].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 417  TuCsNet.switchLs13.ethg$o[17].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 418  TuCsNet.switchLs13.ethg$o[18].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 419  TuCsNet.switchLs13.ethg$o[19].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 420  TuCsNet.switchLs13.ethg$o[20].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 421  TuCsNet.switchLs13.ethg$o[21].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 422  TuCsNet.switchLs13.ethg$o[22].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 423  TuCsNet.switchLs13.ethg$o[23].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 424  TuCsNet.switchLs13.ethg$o[24].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 425  TuCsNet.switchLs13.ethg$o[25].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 426  TuCsNet.switchLs13.ethg$o[26].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 427  TuCsNet.switchLs13.ethg$o[27].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 428  TuCsNet.switchLs13.ethg$o[28].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 429  TuCsNet.switchLs13.ethg$o[29].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 430  TuCsNet.switchLs13.ethg$o[30].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 431  TuCsNet.switchLs13.ethg$o[31].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 432  TuCsNet.switchLs13.ethg$o[32].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 433  TuCsNet.switchLs13.ethg$o[33].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 434  TuCsNet.switchLs13.ethg$o[34].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 435  TuCsNet.switchLs13.ethg$o[35].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 436  TuCsNet.switchLs13.ethg$o[36].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 437  TuCsNet.switchLs13.ethg$o[37].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 438  TuCsNet.switchLs13.ethg$o[38].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 439  TuCsNet.switchLs13.ethg$o[39].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 624  TuCsNet.switchLs13.ethg$o[40].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 440  TuCsNet.switchLs14.ethg$o[0].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 441  TuCsNet.switchLs14.ethg$o[1].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 442  TuCsNet.switchLs14.ethg$o[2].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 443  TuCsNet.switchLs14.ethg$o[3].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 444  TuCsNet.switchLs14.ethg$o[4].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 445  TuCsNet.switchLs14.ethg$o[5].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 446  TuCsNet.switchLs14.ethg$o[6].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 447  TuCsNet.switchLs14.ethg$o[7].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 448  TuCsNet.switchLs14.ethg$o[8].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 449  TuCsNet.switchLs14.ethg$o[9].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 450  TuCsNet.switchLs14.ethg$o[10].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 451  TuCsNet.switchLs14.ethg$o[11].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 452  TuCsNet.switchLs14.ethg$o[12].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 453  TuCsNet.switchLs14.ethg$o[13].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 454  TuCsNet.switchLs14.ethg$o[14].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 455  TuCsNet.switchLs14.ethg$o[15].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 456  TuCsNet.switchLs14.ethg$o[16].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 457  TuCsNet.switchLs14.ethg$o[17].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 458  TuCsNet.switchLs14.ethg$o[18].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 459  TuCsNet.switchLs14.ethg$o[19].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 460  TuCsNet.switchLs14.ethg$o[20].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 461  TuCsNet.switchLs14.ethg$o[21].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 462  TuCsNet.switchLs14.ethg$o[22].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 463  TuCsNet.switchLs14.ethg$o[23].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 464  TuCsNet.switchLs14.ethg$o[24].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 465  TuCsNet.switchLs14.ethg$o[25].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 466  TuCsNet.switchLs14.ethg$o[26].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 467  TuCsNet.switchLs14.ethg$o[27].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 468  TuCsNet.switchLs14.ethg$o[28].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 469  TuCsNet.switchLs14.ethg$o[29].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 470  TuCsNet.switchLs14.ethg$o[30].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 471  TuCsNet.switchLs14.ethg$o[31].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 472  TuCsNet.switchLs14.ethg$o[32].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 473  TuCsNet.switchLs14.ethg$o[33].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 474  TuCsNet.switchLs14.ethg$o[34].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 475  TuCsNet.switchLs14.ethg$o[35].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 476  TuCsNet.switchLs14.ethg$o[36].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 477  TuCsNet.switchLs14.ethg$o[37].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 478  TuCsNet.switchLs14.ethg$o[38].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 479  TuCsNet.switchLs14.ethg$o[39].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 626  TuCsNet.switchLs14.ethg$o[40].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 628  TuCsNet.internet.pppg$o[0].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 629  TuCsNet.internet.pppg$o[1].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 630  TuCsNet.internet.pppg$o[2].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 631  TuCsNet.internet.pppg$o[3].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 632  TuCsNet.internet.pppg$o[4].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 633  TuCsNet.internet.pppg$o[5].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 634  TuCsNet.internet.pppg$o[6].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 635  TuCsNet.internet.pppg$o[7].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 636  TuCsNet.internet.pppg$o[8].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 637  TuCsNet.internet.pppg$o[9].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 638  TuCsNet.internet.pppg$o[10].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 642  TuCsNet.internet.pppg$o[11].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 601  TuCsNet.irbRouter.ethg$o[0].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 603  TuCsNet.irbRouter.ethg$o[1].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 605  TuCsNet.irbRouter.ethg$o[2].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 607  TuCsNet.irbRouter.ethg$o[3].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 609  TuCsNet.irbRouter.ethg$o[4].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 611  TuCsNet.irbRouter.ethg$o[5].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 613  TuCsNet.irbRouter.ethg$o[6].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 615  TuCsNet.irbRouter.ethg$o[7].channel  busy:vector  ETV
+attr interpolationmode  sample-hold
+attr source  channelBusy
+vector 617  TuCsN

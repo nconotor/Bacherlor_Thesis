@@ -1,0 +1,14 @@
+...
+case 2: {
+	switch (type) {
+	...
+		case type_t::ARPFRAME: {
+			*packet = new ARPPacket("CreatedPacket-ArpPacket", 0);
+			break;
+	...
+	switch (type) {
+		case type_t::ARPFRAME: {
+			controlInfo = new Ieee802Ctrl();
+			(*packet)->setControlInfo(controlInfo);					
+			return;
+...

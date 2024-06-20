@@ -1,0 +1,61 @@
+\begin{frame}[fragile]{SEA++}
+	\includestandalone[width=\textwidth]{tikz/baSeaSystem}
+	\begin{onlyenv}<1>
+		\begin{center}
+			\begin{tabular}{c}
+				\lstinputlisting[language=ADL]{listings/example.adl}
+			\end{tabular}
+		\end{center}
+	\end{onlyenv}
+	\begin{onlyenv}<2>
+		\begin{center}
+			\begin{tabular}{c}
+				\lstinputlisting[language=XML]{listings/disable.xml}
+			\end{tabular}
+		\end{center}
+	\end{onlyenv}
+	\begin{onlyenv}<3>
+		\begin{center}
+			\includestandalone[keepaspectratio, scale=0.7]{tikz/baSeaGates}
+		\end{center}
+	\end{onlyenv}
+
+	
+	\note{
+		\begin{itemize}
+			\item SEA besteht aus drei Teilen
+			\item Hinweis auf die Probleme durch den Global Filter
+			
+		\end{itemize}
+%		\begin{onlyenv}<1>
+%			\begin{itemize}
+%				\item SEA++ besteht aus drei Komponenten
+%				\item Erste ist die Attack Specification Language oder auch Attack Descritpion Language
+%				\item DSL 
+%				\item Erlaub Angriffe zu beschreiben
+%				\item Definitionen teilweise uneindeutig
+%				\item 3 Quellen für die Befehle
+%				\begin{itemize}
+%					\item Benutzerhandbuch
+%					\item Zwei Veröffentlichungen (letzte 2019)
+%				\end{itemize}
+%				\item Ab hier beginnen die Probleme
+%			\end{itemize}
+%		\end{onlyenv}
+%		\begin{onlyenv}<2>
+%			\begin{itemize}
+%				\item Interpreter der ADL übersetzt
+%				\item Python 2...
+%				\begin{itemize}
+%					\item[$\Rightarrow$] Fehlende Bibliotheken
+%				\end{itemize}
+%				\item Befehle werden anders verlangt
+%				\begin{itemize}
+%					\item Bsp. APP.type muss String sein!
+%					\item drop(paket) $\Rightarrow$ drop(paket, schwelle)
+%					\item 
+%				\end{itemize}
+%			\end{itemize}
+%		\end{onlyenv}
+	}
+\end{frame}

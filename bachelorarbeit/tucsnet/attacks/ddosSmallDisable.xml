@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+
+<configuration>
+
+	<Physical>
+
+		<Attack>
+			<start_time>80</start_time>
+			<node>3</node>
+
+			<action>
+				<name>Destroy</name>
+			</action>
+		</Attack>
+
+	</Physical>
+
+	<Unconditional>
+
+		<Attack>
+			<start_time>75</start_time>
+			<frequency>1e-05</frequency>
+			<var><name>0</name><value>0</value><type>NUMBER</type></var>
+			<var><name>123</name><value>123</value><type>NUMBER</type></var>
+			<var><name>71</name><value>71</value><type>NUMBER</type></var>
+			<var><name>6</name><value>6</value><type>NUMBER</type></var>
+			<var><name>"tcp_net_inf$o[0]"</name><value>tcp_net_inf$o[0]</value><type>STRING</type></var>
+			<var><name>"true"</name><value>true</value><type>STRING</type></var>
+			<var><name>"129.217.13.1"</name><value>129.217.13.1</value><type>STRING</type></var>
+
+			<action>
+				<name>Create</name>
+				<parameters>packetName:tcpSegment:TRA.type:0010</parameters>
+			</action>
+
+			<action>
+				<name>Change</name>
+				<parameters>packetName:tcpSegment:field_name:TRA.synBit:value:"true"</parameters>
+			</action>
+
+			<action>
+				<name>Change</name>
+				<parameters>packetName:tcpSegment:field_name:TRA.srcPort:value:71</parameters>
+			</action>
+
+			<action>
+				<name>Change</name>
+				<parameters>packetName:tcpSegment:field_name:TRA.destPort:value:71</parameters>
+			</action>
+
+			<action>
+				<name>Change</name>
+				<parameters>packetName:tcpSegment:field_name:TRA.sequenceNo:value:123</parameters>
+			</action>
+
+			<action>
+				<name>Change</name>
+				<parameters>packetName:tcpSegment:field_name:TRA.ackNo:value:0</parameters>
+			</action>
+
+			<action>
+				<name>Change</name>
+				<parameters>packetName:tcpSegment:field_name:controlInfo.destAddr:value:"129.217.13.1"</parameters>
+			</action>
+
+			<action>
+				<name>Change</name>
+				<parameters>packetName:tcpSegment:field_name:controlInfo.protocol:value:6</parameters>
+			</action>
+
+			<action>
+				<name>Change</name>
+				<parameters>packetName:tcpSegment:field_name:sending.outputGate:value:"tcp_net_inf$o[0]"</parameters>
+			</action>
+
+			<action>
+				<name>Put</name>
+				<parameters>packetName:tcpSegment:nodes:617:direction:TX:throughWC:false:delay:0</parameters>
+			</action>
+		</Attack>
+
+	</Unconditional>
+
+</configuration>

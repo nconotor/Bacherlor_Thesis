@@ -1,0 +1,28 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\begin{document}
+	\begin{tikzpicture}	
+		\node[] at (0, 0) (router) {\begin{tabular}{c}
+				\includegraphics[width=16pt]{pic/top/router}\\
+				Router\\
+		\end{tabular}};
+	
+		\node[] at (2, 2) (alice) {\begin{tabular}{c}
+				\includegraphics[width=16pt]{pic/top/pc}\\
+				alice\\
+		\end{tabular}};
+		\node[] at (2, 0) (bob) {\begin{tabular}{c}
+				\includegraphics[width=16pt]{pic/top/pc}\\
+				bob\\
+		\end{tabular}};
+		\node[] at (2, -2) (eve) {\begin{tabular}{c}
+				\includegraphics[width=16pt]{pic/top/laptop}\\
+				eve \\
+		\end{tabular}};
+	
+		\draw[] (router) 
+		edge (alice)
+		edge (bob)
+		edge (eve);
+	\end{tikzpicture}
+\end{document}

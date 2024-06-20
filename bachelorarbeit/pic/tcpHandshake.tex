@@ -1,0 +1,37 @@
+\begin{tikzpicture}[>=latex]
+	\coordinate (A) at (2,5);
+	\coordinate (B) at (2,0);
+	\coordinate (C) at (6,5);
+	\coordinate (D) at (6,0);
+	\draw[thick] (A)--(B) (C)--(D);
+	\draw (A) node[above]{\Large Initiator};
+	\draw (C) node[above]{\Large Receiver};
+	
+	\coordinate (E) at ($(A)!.1!(B)$);
+	\draw (E) node[left]{\begin{tabular}{r}
+			\textit{active close}\\
+			\verb$FIN_WAIT_1$
+	\end{tabular}};
+	
+	\coordinate (F) at ($(C)!.25!(D)$);
+	\draw (F) node[right]{\begin{tabular}{l}
+			\verb$CLOSE_WAIT$\\
+			\textit{passive close}
+	\end{tabular}};
+	\draw[->] (E) -- (F) node[midway,sloped,above]{\verb$FIN$};
+	
+	\coordinate (G) at ($(A)!.4!(B)$);
+	\draw (G) node[left]{\verb$FIN_WAIT_2$};
+	\draw[->] (F) -- (G) node[midway,sloped,above]{\verb$ACK$};
+	
+	\coordinate (H) at ($(C)!.5!(D)$);
+	\draw (H) node[right]{\verb$LAST_ACK$};
+	
+	\coordinate (I) at ($(A)!.7!(B)$);
+	\draw (I) node[left]{\verb$TIME_WAIT_2$};
+	\draw[->] (H) -- (I) node[midway,sloped,above]{\verb$FIN$};
+	
+	\coordinate (J) at ($(C)!.9!(D)$);
+	\draw (J) node[right]{\verb$CLOSED$};
+	\draw[->] (I) -- (J) node[midway,sloped,above]{\verb$ACK$};
+\end{tikzpicture}

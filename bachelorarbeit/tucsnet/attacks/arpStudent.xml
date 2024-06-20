@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+
+<configuration>
+
+	<Conditional>
+
+		<Attack>
+			<start_time>0</start_time>
+			<node>14</node>
+			<var><name>"net_eth_inf$o[0]"</name><value>net_eth_inf$o[0]</value><type>STRING</type></var>
+			<var><name>dstIp</name><value>Empty</value><type>STRING</type></var>
+			<var><name>srcMac</name><value>Empty</value><type>STRING</type></var>
+			<var><name>srcIp</name><value>Empty</value><type>STRING</type></var>
+			<var><name>2</name><value>2</value><type>NUMBER</type></var>
+			<var><name>"0A-AA-00-00-00-7B"</name><value>0A-AA-00-00-00-7B</value><type>STRING</type></var>
+			<var><name>2054</name><value>2054</value><type>NUMBER</type></var>
+			<filter>[:MAC.opcode:==:1:]:[:MAC.srcMACAddress:!=:0A-AA-00-00-00-7B:]:AND</filter>
+
+			<action>
+				<name>Retrieve</name>
+				<parameters>packetName:original:field_name:MAC.srcMACAddress:varName:srcMac</parameters>
+			</action>
+
+			<action>
+				<name>Retrieve</name>
+				<parameters>packetName:original:field_name:MAC.srcIPAddress:varName:srcIp</parameters>
+			</action>
+
+			<action>
+				<name>Retrieve</name>
+				<parameters>packetName:original:field_name:MAC.destIPAddress:varName:dstIp</parameters>
+			</action>
+
+			<action>
+				<name>Create</name>
+				<parameters>packetName:arpPacket:MAC.type:0040</parameters>
+			</action>
+
+			<action>
+				<name>Change</name>
+				<parameters>packetName:arpPacket:field_name:MAC.opcode:value:2</parameters>
+			</action>
+
+			<action>
+				<name>Change</name>
+				<parameters>packetName:arpPacket:field_name:MAC.srcMACAddress:value:"0A-AA-00-00-00-7B"</parameters>
+			</action>
+
+			<action>
+				<name>Change</name>
+				<parameters>packetName:arpPacket:field_name:MAC.destMACAddress:value:srcMac</parameters>
+			</action>
+
+			<action>
+				<name>Change</name>
+				<parameters>packetName:arpPacket:field_name:MAC.srcIPAddress:value:dstIp</parameters>
+			</action>
+
+			<action>
+				<name>Change</name>
+				<parameters>packetName:arpPacket:field_name:MAC.destIPAddress:value:srcIp</parameters>
+			</action>
+
+			<action>
+				<name>Change</name>
+				<parameters>packetName:arpPacket:field_name:controlInfo.src:value:"0A-AA-00-00-00-7B"</parameters>
+			</action>
+
+			<action>
+				<name>Change</name>
+				<parameters>packetName:arpPacket:field_name:controlInfo.dest:value:srcMac</parameters>
+			</action>
+
+			<action>
+				<name>Change</name>
+				<parameters>packetName:arpPacket:field_name:controlInfo.etherType:value:2054</parameters>
+			</action>
+
+			<action>
+				<name>Change</name>
+				<parameters>packetName:arpPacket:field_name:sending.outputGate:value:"net_eth_inf$o[0]"</parameters>
+			</action>
+
+			<action>
+				<name>Drop</name>
+				<parameters>packetName:original:threshold:0</parameters>
+			</action>
+
+			<action>
+				<name>Send</name>
+				<parameters>packetName:arpPacket:delay:0.001</parameters>
+			</action>
+		</Attack>
+
+	</Conditional>
+
+</configuration>

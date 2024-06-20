@@ -1,0 +1,19 @@
+list dstList = {617}
+
+from 75 every 0.00001 do {
+	packet tcpSegment
+
+	create(tcpSegment, "TRA.type", "0010")
+
+	change(tcpSegment, "TRA.synBit", "true")
+	change(tcpSegment, "TRA.srcPort", 71)
+	change(tcpSegment, "TRA.destPort", 71)
+	change(tcpSegment, "TRA.sequenceNo", 123)
+	change(tcpSegment, "TRA.ackNo", 0)
+
+	change(tcpSegment, "controlInfo.destAddr", "129.217.13.1") 
+	change(tcpSegment, "controlInfo.protocol", 6)
+
+    change(tcpSegment, "sending.outputGate", "tcp_net_inf$o[0]")
+	put(tcpSegment, dstList, TX, FALSE, 0)	
+}

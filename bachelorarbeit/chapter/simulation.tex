@@ -1,0 +1,320 @@
+\chapter{Aufbau der Simulation}\label{chap:sim4}
+Im Folgenden wird auf die Implementierung des in Kapitel \ref{chap:methodik3} beschriebenen Modells eingegangen. Die Gliederung folgt dem \gls{omnetpp}-Arbeitsablauf, indem zuerst die Topologie umgesetzt wird und diese danach konfiguriert wird. Zuletzt werden die Angriffe mit \gls{seapp} umgesetzt.
+
+\section{Umsetzung der Netzwerktopologie}
+\begin{figure}[ht]
+	\centering
+	\includestandalone[width=\textwidth,keepaspectratio, height=12cm]{tikz/baTop}
+	\caption[Modelltopologie]{Vereinfachte Netzwerktopologie der Informatikfakultät an der TU-Dortmund.}
+	\label{fig:tucsnetOverview}
+\end{figure}
+
+Für das Modell des Informatiknetzwerks wird ein \gls{omnetpp}-Netzwerk mit dem Namen \ned{TuCsNet} erstellt, welches aus den zusammengesetzten Modulen \ned{StandardHost}, \ned{Router}, \ned{InternetCloud} und \ned{EtherSwitch} besteht. In Abbildung \ref{fig:tucsnetOverview} wird eine vereinfachte Netzwerktopologie dargestellt. Grob kann das Netzwerk in zwei Teile aufgeteilt werden,
+\begin{enumerate}
+	\item einem Innennetz, in diesem Fall das Netzwerk der Fakultät für Informatik
+	\item sowie einem Außennetz, welches bei der Verbindung zwischen dem Router der \gls{irb} und des \gls{itmc} beginnt und das restliche Netzwerk umfasst.
+\end{enumerate}
+
+\subsection{Innennetz}
+Das Innennetz stellt ein vereinfachtes Modell des Netzwerks der Fakultät für Informatik an der TU-Dortmund dar. Es kann in einen zentralen Router sowie mehrere Netzbereiche mit Rechnern und Servern unterteilt werden.
+
+\subsubsection{IRB-Router}
+An einem zentralen Router der \gls{irb} werden alle Netzwerkbereiche über Switches angebunden. Dies entspricht der \gls{sterntopologie} des realen Netzwerks. In dem echten Netzwerk besteht der zentrale Router aus zwei einzelnen Routern, welche unter Zuhilfenahme von \gls{vss} zu einem Router zusammen geschaltet sind. Das proprietäre Protokoll wird in Version 2.6 von \gls{inet} nicht unterstützt, weshalb der zentrale Router nur aus einem zusammengesetzten Modul \ned{Router} besteht. 
+
+\subsubsection{Netzwerkbereiche}
+\begin{program}[t]
+	\lstinputlisting[firstline=38,lastline=66, language=NED, caption={[Kabeltypen]}]{tucsnet/tucsnetwork.ned}
+	\caption{Verwendete Kabeltypen um die Geräte in dem \ned{tucsnet} zu verbinden.}
+	\label{lst:cableTypes}
+\end{program}
+Im Unterschied zu den {ca.} 90 Netzbereichen des realen Netzwerks, sind in der Simulation nur Bereiche für die Fakultäten und Studenten sowie ein Datacenterbereich der \gls{irb} vorgesehen. Die Bezeichnung der Netzwerkbereiche richtet sich nach dem Kürzel \ned{ls} gefolgt von der Nummer des Lehrstuhls \ned{1,2,4-9,11-14} und den Bezeichnern \ned{studentHost} sowie \ned{irbServer}. 
+
+In jedem der Bereiche sind die Netzwerkgeräte repräsentiert durch \ned{StandardHost}-Module, welche mit einem \ned{EtherSwitch}- und \ned{GlobalFilter}-Modul verbunden sind. Jeder Switch ist direkt mit dem Router verbunden. Auf eine Modellierung von zentralen Punkten, an denen alle Geräte eines Gebäudes zusammenlaufen, wird verzichtet. Weil das reale Netzwerk \gls{vlan} nutzt, um die verschiedenen Bereiche des Netzwerks zu trennen. Die Funktionalität für \gls{vlan}, realisiert durch \gls{ieee8021q}, wird in \gls{inet} erst in Version 4.1.0 \cite{InetReleases} hinzugefügt, welche zusätzlich nur mit \gls{omnetpp} in Version 5.4.1 kompatibel ist. Aufgrund des fehlenden \gls{vlan} besitzen die Lehrstühle keine Server in der eigenen Broadcastdomaine.
+
+\paragraph{Anzahl der Netzwerkgeräte}
+Die Größe der Bereiche ist stark vereinfacht. Es wird von ungefähr $700$ aktiven Netzwerkgeräten zum Zeitpunkt der Simulation ausgegangen. Diese werden so aufgeteilt, dass im studentischen Bereich $100$ Geräte vorhanden sind, in jeden Lehrstuhlbereich $40$ und im IRB-Serverbereich jeweils $10$. Diese Konfiguration wird mit den Parametern \ned{hostCount, serverCount} und \ned{studentCount} als Standardwerte übergeben.
+
+\paragraph{Verbindungen}
+Im Innennetz werden die Kabeltypen \ref{lst:cableTypes} \ned{EthGebaeudeKabel, EthRaumKabel, EthServerRaumKabel} und \ned{EthIrbServerKabel} verwendet, welche sich in der Länge\footnote{Die Längen haben für die eigentliche Simulation nur eine geringe Bedeutung, da im heutigen Ethernet die Latenzen nur minimal über die Kabellänge bestimmt werden.} und Übertagungsrate unterscheiden. Die Länge der Kabel liegt zwischen \SI{50}{\metre} und \SI{500}{\metre}.
+
+Um die Verbindungen zwischen Switch und Netzwerkgeräten außerhalb der Serverbereichs zu realisieren, werden \ned{EthRaumKabel} mit \SI{1}{\giga\bit\per\second} verwendet, was dem echten Netzwerk entspricht. Im realen Netzwerk wurden mehrere Netzbereiche über den gleichen Switch angebunden. In dem Modell ist jeder Bereich über einen eigenen dedizierten Switch mit einem Kabel \ned{EthGebaeudeKabel} bei einer Übertragungsrate von \SI{10}{\giga\bit\per\second} angebunden.
+
+Die restlichen Kabeltypen mit jeweils \SI{10}{\giga\bit\per\second} und  \SI{40}{\giga\bit\per\second} werden im Serverbereich eingesetzt, sowohl für die Verbindung von Server zum Switch, als auch von Switch zum Router. Zusätzlich zu den Verbindungen mit Ethernetkabeln muss jeder \ned{StandardHost} und Router mit dem \ned{GobalFilter} verbunden werden. 
+
+\subsection{Außennetz}
+An dem \gls{itmc}-Router ist eine \ned{InternetCloud internet} angeschlossen, um ein grobes Modell des Internets zu erzeugen. Mehrere Module des Typs \ned{StandardHost} bilden Server im Internet ab. Die Module sind, der typischen Terminologie im Sicherheitsbereich folgend, \ned{eve} und \ned{alice} benannt. Bei der Bezeichnung \ned{alice} handelt es sich um einem Modulvektor der Größe 10 und bei \ned{eve} um ein einzelnes Modul.
+
+Alle im Netzwerk genutzten Kabeltypen sind in dem Quellcode \ref{lst:cableTypes} dargestellt.
+Das \gls{itmc} ist mit einer \SI{10}{\giga\bit\per\second} Leitung an das Internet angebunden, wobei dies einer Vereinfachung der doppelten \SI{5}{\giga\bit\per\second} Anbindung entspricht. Eine \SI{40}{\giga\bit\per\second} Leitung wird zwischen dem \gls{itmc} und \gls{irb} Netz eingesetzt. Alle Geräte im Internet nutzen eine ideale Anbindung. Bei den Verbindungen im Außennetz handelt es sich um \gls{ppp}-Verbindungen. 
+
+\section{Konfiguration des Netzwerks (ini)}
+Die Netzwerkkonfiguration \file{omnetpp.ini} ist in kleine Abschnitte eingeteilt, welche spezifische Konfigurationen enthalten. In den Abschnitten \ini{[ServerConfig]} und \ini{[ClientConfig]} werden die Server- und Clientknoten konfiguriert, wobei geteilte Konfigurationen der Knoten in der \ini{[NodeConfig]} vermerkt sind. Am Ende folgen die Abschnitte der Angriffe.
+
+\subsection{Allgemeine Konfigurationen}
+In dem Abschnitt \ini{[General]} wird die Zeit der Simulation auf \SI{100}{\second}  begrenzt, da nur in diesem Zeitraum Anwendungsdatenverkehr erzeugt wird. Zusätzlich würden längere Simulationen die Größe der aufgezeichneten Daten und die Fähigkeiten der zur Verfügung stehenden Hardware übertreffen. Im Anschluss wird mit der Anweisung \ini{seed-set} der Startwert des Zufallsgenerators auf 1 bis 5 in Abhängigkeit des durchgeführten Durchlaufs gesetzt. Danach können die Ordner für aufgezeichneten Daten in diesem Abschnitt und die Aufzeichnungsfähigkeiten der Knoten angepasst werden.
+
+\subsection{Konfiguration der einfachen Netzwerkmodule}
+\begin{table}[ht]
+	\centering
+	\begin{tabularx}{\textwidth}{|l|X|l|}
+		\hline
+		\rowcolor{Gainsboro!60}
+		\textbf{Module}                    & \textbf{Parameter}     & \multicolumn{1}{c|}{\textbf{Wert}} \\ \hline
+		\multirow{3}{*}{ARP}               & retryTimeout           & 1 s                                 \\ \cline{2-3}
+		                                   & retryCount             & 3                                  \\ \cline{2-3}
+		                                   & cacheTimeout           & 180 s                               \\ \hline
+		\multirow{4}{*}{EthernetInterface} & num[Out/In]putHooks    & 1                                  \\ \cline{2-3}
+		                                   & [out/in]putHook        & "ThruputMeter"                     \\ \cline{2-3}
+		                                   & queueType              & "DropTailQueue"                    \\ \hline
+		\multirow{8}{*}{TCP}               & nagleEnabled           & true                               \\ \cline{2-3}
+		                                   & limitedTransmitEnabled & true                               \\ \cline{2-3}
+		                                   & increasedIWEnabled     & true                               \\ \cline{2-3}
+		                                   & windowScalingSupport   & true                               \\ \cline{2-3}
+		                                   & timestampSupport       & true                               \\ \cline{2-3}
+		                                   & tcpAlgorithmClass      & "TCPNewReno"                      \\ \cline{2-3}
+		                                   & sackSupport            & false                               \\ \cline{2-3}
+		                                   & delayedAcksEnabled     & true                               \\ \hline
+	\end{tabularx}
+	\caption{Modifizierte Parameter mit zugewiesenen Wert der Netzwerkmodule}
+	\label{tab:modifiedModuleParameters}
+\end{table}
+
+Die meisten Module werden in ihrer Standardkonfiguration betrieben, wobei abgeänderte Parameterwerte   in der Tabelle \ref{tab:modifiedModuleParameters} zusammengefasst sind. 
+\subsubsection{ARP-Modul}
+Außer bei Durchführung des ARP-Angriffs sind die Werte für das ARP-Modul dem echten Netzwerk nachempfunden. Praktische Bedeutung hat der \ini{cacheTimeout} in der aktuellen Simulationskonfiguration nicht, da diese deutlich kürzer läuft. Um einen Cachetimout zu beobachten, wird bei dem ARP-Angriff ein Timeout von \SI{30}{\second} genutzt. Das ARP Modul ist zusätzlich so konfiguriert, dass es drei ARP-Anfrageversuche durchführt und die Wartezeit dazwischen jeweils \SI{1}{\second} beträgt.
+
+\subsubsection{Ethernet-Modul}
+Das zusammengesetzte Modul \ned{EthernetInterface} ist so konfiguriert, dass ein- und ausgehender Netzwerkverkehr mit dem Modul \ned{ThruputMeter} gemessen wird. Da der \ini{csmacd}-Parameter nicht gesetzt wurde, benutzt die Ethernet-Implementierung eine Voll-Duplex-Verbindung, bei der Überlasten in einer \ini{"DropTailQueue"} zwischengespeichert werden. 
+
+\subsubsection{TCP-Modul}
+Die Konfiguration des TCP-Moduls folgt den Standardeinstellungen des Linux TCP-Stapels \cite{ManTCP}, da große Teile der Netzwerkgeräte der Fakultät für Informatik mit Linux betrieben werden. Im Gegensatz zu der Konfiguration in Linux, werden selektive Bestätigungen (Selective Acknowledgment \cite{RFC2018}), über den Parameter \ini{sackSupport} gesteuert, deaktiviert, da andernfalls die Simulation nach wenigen Events abstürzt\footnote{Mit der Konfiguration \ini{[KeinAngriffSackCrash]} kann der Absturz reproduziert werden.}. Der Grund für den Absturz ist eine fehlgeschlagene Assertion in der TCP-Implementierung. Zu beachten ist, dass sowohl die Implementierungen in \gls{inet} als auch im Linux Kernel Abweichungen zum \gls{rfc}-Standard beinhalten. In der \gls{inet}-Implementierung des Moduls in der Datei \file{TCP.ned} wird auf die Unterschiede hingewiesen. 
+
+\subsection{Konfigurationen des Internet-Cloud-Moduls}
+Das Modul \ned{InternetCloud} wird genutzt, um Datenpakete über das Internet zu verzögern und einen leichten Paketverlust zu simulieren. Die beiden Funktionen \ned{truncnormal} und \ned{uniform} werden genutzt um Zahlen aus einer positiven Normalverteilung und Gleichverteilung zu generieren.
+
+Durch die Normalverteilung \ned{5ms + truncnormal(10ms,10ms)} wird eine durchschnittliche Verzögerung von ungefähr \SI{15}{\milli\second} erreicht, womit die \gls{rtt} bei \SI{30}{\milli\second} mit starken Schwankungen liegen sollte. Der minimal Wert von \SI{5}{\milli\second} wurde wegen eines durchgeführten Pingtest \ref{app:pingData} aus dem Fakultätsnetzwerk zu dem Server \url{8.8.8.8}\footnote{Bei \url{8.8.8.8} handelt es sich um einen DNS Server von Google \cite{GoogleDNS}. } gewählt. Es wurde eine zusätzliche Verzögerung von durchschnittlich \SI{10}{\milli\second} mit einer Standardabweichung von \SI{10}{\milli\second} hinzugefügt, um schlechtere Verbindungen zu simulieren. Es kann davon ausgegangen werden, dass die meisten Geräte schlechtere Anbindungen als Google besitzen und dass \gls{icmp} Datenverkehr bevorzugt behandelt wird.
+
+Ein leichter Paketverlust wird durch die Zufallsverteilung \ned{uniform(0, 10000) < 1} erreicht. Genaue Werte für einen Paketverlust liegen nicht vor. Daher wird diese Modellierung genutzt, die im Durchschnitt 0,1 \textperthousand{} der Datenpakete nicht weiterleitet.
+
+\subsection{Konfigurationen der Anwendungsmodule}
+\begin{table}[ht]
+	\centering
+	\begin{tabular}{|l|l|l|}
+		\hline
+		\rowcolor{Gainsboro!60}
+		\hline
+		Bereich                 & Anwendung   & Anzahl            \\ \hline
+		\multirow{4}{*}{Server} & TCP         & 50 (alice) 30(irb) \\ \cline{2-3} 
+		& UDP         & 0                 \\ \cline{2-3} 
+		& Videostream &  50 (alice) 20 (irb)                \\ \cline{2-3} 
+		& Ping        & 0                 \\ \hline
+		\multirow{4}{*}{Host}   & TCP         & 2                 \\ \cline{2-3} 
+		& UDP         & 1                 \\ \cline{2-3} 
+		& Videostream & 1                 \\ \cline{2-3} 
+		& Ping        & je 10 Server 2    \\ \hline
+	\end{tabular}
+	\caption{Anzahl an Anwendungsmodulen je Host oder Server}
+	\label{tab:modulAnzahl}
+\end{table}
+Der Netzwerkverkehr wird von den Anwendungsmodulen erzeugt, von den es sieben unterschiedliche Grundtypen im Netzwerk gibt. In der Tabelle \ref{tab:nedApps} werden die wichtigsten Module vorgestellt. Nur Serveranwendungen sind exklusiv in Modulen aus dem Serverbereich konfiguriert. Die jeweiligen Netzbereiche werden durch ihre Namen differenziert. Alle Geräte, welche mit \ned{*Host*} identifiziert werden können, sind Clientgeräte. Server werden durch \ned{*Server*}\footnote{Die Vektoren \ned{aliceServer[]} und \ned{irbServer[]} sind die einzigen Server in der Simulation.} identifiziert. 
+
+Da in jedem Netzwerkbereich unterschiedlich viele Anwendungsmodule eingesetzt werden, ist die genaue Anzahl pro \ned{StandardHost} in den jeweiligen Bereichen in der Tabelle \ref{tab:modulAnzahl} vermerkt. Dabei besitzen Server mehr Anwendungsmodule pro Gerät, da es insgesamt weniger Server gibt. 
+
+Eine Ausnahme in der Konfiguration bildet das Modul \ned{eve}, welches ein Modul \ned{TCPGenericSrvApp} besitzt. Dies garantiert das Vorhandensein eines \gls{tcp}-Protokollstacks, wodurch mit \gls{seapp} Angriffe von diesem Knoten ausgeführt werden können. 
+
+\subsubsection{TCP-Datenverkehr}
+\begin{table}[ht]
+	\centering
+	\begin{tabularx}{\textwidth}{|l|X|X|}
+		\hline
+		\rowcolor{Gainsboro!60}
+		App      & Parameter             & Wert                                      \\ \hline
+		TCPGenericSrvApp                   & localPort             & 80-93                                     \\ \hline
+		\multirow{9}{*}{TCPBasicClientApp} & connectAddress        & irbServer[*]/aliceServer[*] \\ \cline{2-3}
+		                                   & connectPort           & intuniform(80,93)                         \\ \cline{2-3}
+		                                   & requestLength         & Unterschiedlich \\ \cline{2-3}
+		                                   & replyLength           & Unterschiedlich \\ \cline{2-3}
+		                                   & numRequestsPerSession & min(10, truncnormal(1, 2) )               \\ \cline{2-3}
+		                                   & idleInterval          & min(100ms, truncnormal(10ms, 50ms) )      \\ \cline{2-3}
+		                                   & thinkTime             & min(2s, truncnormal(10ms, 250ms))         \\ \cline{2-3}
+		                                   & dataTransferMode      & "{}object"                                \\ \cline{2-3}
+		                                   & startTime             & Unterschiedlich \\ \hline
+	\end{tabularx}
+	\caption{Übersicht der Parameter von den TCP-Anwendungen}
+	\label{tab:tcpModule}
+\end{table}
+In der Tabelle \ref{tab:tcpModule} sind alle genutzten Parameter für die Server- und Clientgeräte dargestellt. Auf den Servern werden jeweils die ersten 13 TCP-Anwendungen mit dem Modul \ned{TCPGenericSrvApp} belegt und an die Ports 80 bis 93 gebunden. 
+
+Die \ini{thinkTime} und \ini{idleInterval} geben die Wartezeiten zwischen den Anfragen und dem Senden einzelner Segmente an. Beide Parameter werden für alle Anwendungen mit Zufallsvariablen initialisiert. Die Wartezeit zwischen zwei Anfragen ist maximal \SI{2}{\second} lang und beträgt im Durchschnitt \SI{10}{\milli\second} mit einer großen Standardabweichung von \SI{250}{\milli\second}. Zwischen zwei Datenpaketen liegt eine Wartezeit von maximal \SI{10}{\milli\second} bei einem gleichen Durchschnitt mit geringerer Standardabweichung von \SI{50}{\milli\second}. Beide Werte können nur ein grobes Modell von tatsächlichen TCP-Anwendungsdatenverkehr erreichen, da die Charakteristika für jede Anwendung und jedes Netzwerk unterschiedlich sind.
+
+Die Anfrageanzahl wird durch die Verteilung \ini{min(10, truncnormal(1, 2))} für alle Geräte festgelegt, was dem Verhalten neuerer \gls{http} Versionen\footnote{HTTP 1.0 nutzt für jedes Objekt eine neue Verbindung \cite{RFC1945}.} entspricht. Der \ini{dataTransferMode} wird auf \ini{object} gesetzt, damit die Server jeweils eine Antwort der Länge \ini{replyLength} verschicken. Mit diesen und dem Parameter \ini{requestLength} können Up- und Downloaddatenströme mit TCP modelliert werden. Ist die Anfrage größer als die Antwort, so wird eine Datei hochgeladen und anders herum. Für die Server wird jeweils von Downloaddatenverkehr ausgegangen, welcher mit der Zufallsverteilung \ini{min(1MiB, 20B + truncnormal(500B, 500B))} für Anfragen und \ini{min(16MiB, 20B + truncnormal(2MiB, 2MiB))} für Antworten modelliert wird. Für den Download wurde der Mittelwert von \SI{2}{\mega\byte} entsprechend der Durchschnittsgröße einer Website \cite{Almanac2019} im Jahr 2019 gewählt.
+
+Im Clientbereich werden die beiden TCP-Anwendungen unterschiedlich konfiguriert. Die erste Anwendung folgt der Konfiguration der Server und verbindet sich mit den IRB-Servern. Die zweite TCP-Anwendung nutzt für Anfrage und Antwort die Verteilung \ini{min(16MiB, 20B + truncnormal(2MiB, 2MiB))}, um einen gemischten Netzwerkverkehr zu erzeugen. Diese Datenverkehrsmodellierung wird genutzt, da die zweite Anwendung sich mit den Internetservern (alice) verbindet und in diesem Szenario Up- und Downloads typisch sind. Im Serverbereich verbinden sich die Anwendungen mit den Geräten aus dem jeweiligen anderen Bereich. Um jedem Gerät im Vektor einen anderen Verbindungspartner zuzuweisen, wird eine Kombination aus Funktionen genutzt. Der Parameter \ini{choose(intuniform(0,9), moduleListByPath("**.<Serverbereich>[*]"))} besteht aus den Funktionen \emph{choose, intuniform} und \emph{moduleListByPath}. In Kombination wählt \emph{choose} aus der Liste an Geräten, welche \emph{moduleListByPath} mit dem Ausdruck \emph{**.<Serverbereich>[*]} findet, einen zufälligen Index durch \emph{intuniform} aus.
+
+Mit einer Gleichverteilung werden die Verbindungsports aus dem Bereich 80 bis 93 für alle Geräte festgelegt. Die Startzeit unterscheidet sich für die unterschiedlichen Bereiche. Geräte, welche über das Internet kommunizieren, starten früher, da sonst in der Simulation in den späteren Minuten zu einem starken Anstieg der Belastung kommt. Der Grund dafür sind die Verzögerungen und Verluste im Internet, welche den Netzwerkdatenverkehr beeinflussen. Dies erschwert die Simulation des Internetdatenverkehrs, weil vor Ausführung der Simulation nicht zu erkennen ist, wie sich Änderungen auf diesen Datenverkehr auswirken. Der gewählte Parameter für den Start liegt für die Simulation bei \ini{uniform(0s,90s)}. Clientgeräte starten zwischen dem Anfang und Ende der Simulation.
+
+
+\subsubsection{Generischer UDP-Datenverkehr}
+\begin{table}[ht]
+	\centering
+	\begin{tabularx}{\textwidth}{|l|X|X|}
+		\hline
+		\rowcolor{Gainsboro!60}
+		App                          & Parameter     & Wert                                   \\ \hline
+		\multirow{5}{*}{UDPBasicApp} & destAddresses & *Server{[}*{]}                         \\ \cline{2-3}
+		& destPort      & intuniform(9080,9085)                  \\ \cline{2-3}
+		& messageLength & min(508B, 8B + truncnormal(256B, 64B)) \\ \cline{2-3}
+		& sendInterval  & min(100ms, truncnormal(50ms, 50ms))   \\ \cline{2-3}
+		& startTime     & uniform(0s,1s)                         \\ \hline
+		\multirow{1}{*}{UDPEchoApp}  & localPort     & 9080-9085                              \\ \hline
+	\end{tabularx}
+	\caption{Übersicht der Parameter von den UDP-Anwendungen}
+	\label{tab:udpModule}
+\end{table}
+Die geänderte Parameter der UDP-Module sind in der Tabelle \ref{tab:udpModule} vermerkt. Module des Typs \ned{UDPEchoApp} werden an die Ports 9080 bis 9085 gebunden. 
+
+Auf der Clientseite wird ein \ned{UDPBasicApp} genutzt, welches zufällig an die Serverports gebunden wird. Die Länge der Nachrichten ist auf \SI{508}{\byte} begrenzt, womit im Regelfall keine Fragmentierungen der Datagramme durchgeführt werden müssen. Im Normalfall beträgt die Größe \SI{262}{\byte} mit einer Standardabweichung von \SI{64}{\byte}. Die Datagramme werden maximal alle \SI{100}{\milli\second} verschickt. Durchschnittlich werden alle \SI{50}{\milli\second} mit einer Standardabweichung von \SI{50}{\milli\second} Datagramme gesendet. Alle \ned{UDPBasicApp} starten in der ersten Sekunde der Simulation und verbinden sich mit den \ini{irbServer}-Bereich.
+
+\subsubsection{UDP-Videodatenverkehr}
+\begin{table}[ht]
+	\centering
+	\begin{tabularx}{\textwidth}{|l|l|X|}
+		\hline
+		\rowcolor{Gainsboro!60}
+		App      & Parameter     & Wert                                     \\ \hline
+		\multirow{3}{*}{UDPVideoStreamCli} & serverAddress & **.*Server[*]                            \\ \cline{2-3}
+		                                   & serverPort    & intuniform(8080,8085)                    \\ \cline{2-3}
+		                                   & startTime     & uniform(0s,90s)                          \\ \hline
+		\multirow{4}{*}{UDPVideoStreamSvr} & localPort     & 8080-8085                                \\ \cline{2-3}
+		                                   & videoSize     & $2^{2,3,4,5,6,7}$                        \\ \cline{2-3}
+		                                   & sendInterval  & min(100ms, truncnormal(50ms, 50ms))      \\ \cline{2-3}
+		                                   & packetLen     & min(508B, 128B + truncnormal(256B, 64B)) \\ \hline
+	\end{tabularx}
+	\caption{Übersicht der Parameter von den Videostream-Anwendungen}
+	\label{tab:videoModule}
+\end{table}
+Die veränderten Parameter für die Videostream-Module sind in der Tabelle \ref{tab:videoModule} zusammengefasst. Ähnlich zu den UDP-Modulen werden die Server an die Ports 8080 bis 8085 gebunden. Beide Modultypen nutzen das gleiche Intervall um Datenpakete zu versenden. Die Datagramme des Videostreamservers sind im Gegensatz zu den anderen UDP-Modulen leicht größer und liegen bei mindestens \SI{128}{\byte} sowie einer Durchschnittsgröße von \SI{384}{\byte}. Ein großer Unterschied zu den UDP-Modulen besteht hinsichtlich der Übertragungsdauer. Die UDP-Module senden bis zu einem festen Zeitpunkt, wohingegen das Modul \ned{UDPVideoStreamSvr} eine feste zu übertragene Datengröße besitzt. Mit dem Parameter \ini{videoSize} wird diese festgelegt und ist an das jeweilige Modul gebunden. Gleich den Ports werden den Modulen jeweils in zweifacher Potenz aufsteigende Dateigrößen zugewiesen.
+
+Die Videoclienten verbinden sich jeweils zu den IRB- oder Internetservern. Im Serverbereich wird jeweils eine Verbindung zu den anderen Serverbereich hergestellt und alle Clientgeräte verbinden sich mit den IRB-Servern.
+
+\subsubsection{ICMP-Datenverkehr}
+\begin{table}[ht]
+	\centering
+	\begin{tabularx}{\textwidth}{|l|X|X|}
+		\hline
+		\rowcolor{Gainsboro!60}
+		App & Parameter    & Wert            \\ \hline
+		*Host{[}*9{]}                 & destAddr     & irbServer       \\ \hline
+		*Host{[}*8{]}                 & destAddr     & aliceServer     \\ \hline
+		\multirow{3}{*}{*Host{[}*{]}} & sendInterval & 1s              \\ \cline{2-3}
+		& startTime    & exponential(1s) \\ \cline{2-3}
+		& stopTime     & 100s            \\ \hline
+	\end{tabularx}
+	\caption{Übersicht der Parameter von den Ping-Anwendungen}
+	\label{tab:pingModul}
+\end{table}
+Mit einem Ping-Modul wird \gls{icmp}-Datenverkehr erzeugt. Module dieses Typs sind in den achten und neunten Clientgeräten vorhanden und senden zu einen beliebigen IRB- und Internetserver im Intervall von einer Sekunde Ping-Nachrichten. Alle Module fangen in den ersten Sekunden an zu senden.
+
+\subsection{Angriffskonfigurationen}
+Die Angriffe werden in den Abschnitten, welche mit dem Wort \enquote{Angriff} enden, konfiguriert, wobei alle Abschnitte ähnlich aufgebaut sind. Als Erstes wird die Konfiguration ohne Angriff erweitert. Danach wird eine kurze Beschreibung des jeweiligen Angriffs mit \ini{description} gegeben und der String \ini{attackConfigurationFile} auf den jeweiligen Angriff überschrieben. 
+
+\section{Netzwerkmodelleinschränkungen}
+Durch die Einschränkungen des Programmökosystems weicht das Modell vom realen Netzwerk ab. Auf topologischer Ebene sind durch fehlende Redundanzen in den Geräteverbindungen und in einfachen Ausführungen ansonsten redundanter Netzwerkgeräte, Angriffe nicht zielführend, wenn diese auf
+den Ausfall jener Angriffspunkte abzielen. Aufgrund der Abweichungen durch die fehlende \gls{vlan}-Implementierung sind Aussagen zu Überlastungen der Lehrstuhlverbindungen nicht möglich. 
+
+Weiterhin ist das Datenverkehrsmodell durch die fehlenden Fakultäten im \gls{itmc}-Netz eingeschränkt. Überdies fehlt die WLAN-Komponente des Universitätsnetzes und eine weitgehende Internetmodellierung. Zusätzlich kann auf Anwendungsebene nur ein grobes Datenverkehrsmodell erstellt werden. Da \gls{omnetpp} in Verbindung mit \gls{seapp} keine gesonderten Netzwerkdatenverkehrsgeneratoren unterstützt, kann nur mit den Standardanwendungen gearbeitet werden. Insbesondere ist es aufwändig viele unterschiedliche Portbereiche zu nutzen, da diese manuell im Server- und Clientgeräten erstellt werden müssen.
+
+Des Weiteren wird ohne Netzwerkdatenverkehrsgeneratoren die Modellanpassbarkeit auf verschiedene Übertragungsraten erschwert, was sich in der Flexibilität des Netzwerks widerspiegelt. Dadurch ist die Simulationsdauer nicht anpassbar, ohne alle Anwendungsmodulkonfigurationen zu ändern. Zuletzt fehlen Module aus dem Sicherheitsbereich, womit die Antworten der Standardmodule stark von den realen Anwendungen abweichen. 
+
+\section{Umsetzung des ARP-Posioning-Angriffs}
+Im weiteren Verlauf wird die Umsetzung der Angriffe beschrieben. Für den ARP-Angriff ist eine Erweiterung von \gls{seapp} nötig, da im Ursprungszustand \gls{arp} nicht unterstützt wird. Deshalb wird der in Abschnitt \ref{sec:erweiterungSea} beschriebene Weg, ein neues Datenpaket zu \gls{seapp} hinzuzufügen, befolgt. Um dieser Anleitung zu folgen wird zuerst überprüft, ob eine entsprechende Datei ARP-\file{.msg} vorhanden ist. Unter dem Pfad \file{networklayer/arp/ARPPacket.msg} findet sich diese Datei. 
+
+\paragraph{Erweiterung der \file{seapputils.cc}}
+Als Nächstes wird geprüft, ob eine Schicht für ein ARP-Datenpaket zurückgegeben wird. Die Methode \csource{getPacketLayer($\dots$)} in der Datei \file{seapputils.cc} gibt den entsprechenden Wert 2 für die \gls{layer2} zurück. 
+
+\paragraph{Erweiterung der \file{Create.h}}
+Um mit der Anweisung \adl{create} ein neues ARP-Datenpaket zu erstellen, wird in der \csource{Create.h} unter dem Pfad \file{/actions/create/Create.h} das Enumerate \csource{type\_t} erweitert. Der neu eingefügte Typ heißt \csource{ARPFRAME}.
+
+\paragraph{Erweiterung der \file{Create.cc}}
+\begin{program}[ht]
+	\lstinputlisting[firstline=0, language=C++, caption={[Änderungen an der Create.cc]}]{listings/createCC.lst}
+	\caption{Auszug aus der Create.cc} 
+	\label{lst:createCC}
+\end{program}
+Zuletzt muss nach Anleitung in der \file{Create.cc} unter dem Pfad \file{/actions/create/Create.cc} die Methode \csource{buildNewPacket($\dots$)} modifiziert werden, um die Logik für das Erstellen des Datenpakets einzufügen. Diese Modifizierung wird in dem Quellcode \ref{lst:createCC} skizziert. Im ersten Teil wird, falls ein Datenpaket des Typs \csource{ARPFRAME} erkannt wurde, ein neues Objekt \csource{ARPPaket} erstellt. Danach wird für dieses Objekt ein \adl{controlInfo}-Objekt des Typs \adl{Ieee802Ctrl} gesetzt. Sollte dieser Code fehlen, werden die Datenpakete nicht richtig von den Modulen in der Simulation behandelt, da Informationen über den Empfänger oder Sender fehlen.
+
+\paragraph{Erweiterung der \file{Change.cc}}
+\begin{program}[ht]
+	\lstinputlisting[firstline=0, language=C++, caption={[Änderungen an der Change.cc]}]{listings/changeCC.lst}
+	\caption{Auszug aus der Change.cc} 
+	\label{lst:changeCC}
+\end{program}
+Obwohl im Benutzerhandbuch nicht angegeben, reichen die Änderungen nicht aus, um ein funktionierendes neues Datenpaket zu erstellen. Da ein ARP-Datenpaket hauptsächlich Informationen zu IP- und MAC-Adressen enthält\footnote{Die anderen Felder werden von der ARP-Implementierung automatisch ausgefüllt.} und diese durch die \adl{change}-Anweisung besonders behandelt werden, muss die entsprechende Klasse im Pfad \file{/actions/change/Change.cc} so bearbeitet werden, sodass die Methode \csource{executeOnField()} für die entsprechenden Felder einen Typecast ausführt. In Quellcode \ref{lst:changeCC} ist eine solche Änderung skizziert. Es werden Abfragen für die Felder \adl{src\&destMACAddress} und \adl{src/destIPAddress} des ARP-Datenpakets erstellt. In diesen werden  die Strings zu Objekten umgewandelt, welche dann über entsprechende Methoden gesetzt werden können.
+
+\subsection{Implementierung des Angriffs}
+\begin{program}[ht]
+	\lstinputlisting[firstline=0, language=ADL, caption={[ARP-Angriff Definition]}]{tucsnet/attacks/arpServer.adl}
+	\caption{Angriffsdefinition für den ARP-Angriff auf den Server}
+	\label{lst:arpAdl}
+\end{program}
+Mit diesen Erweiterungen kann ein ARP-Datenpaket mit \adl{create(PaketName, "MAC.type", "0040")} erstellt werden. Die Informationen im Objekt \adl{controlInfo} können nach der bekannten Syntax verändert werden. 
+
+In der Angriffsbeschreibung, dargestellt in Quellcode \ref{lst:arpAdl}, wird die Erweiterung genutzt, um den \gls{arp}-Ablauf zu stören. Der bedingte Angriff zielt dabei auf den Server \ned{irbServer[0]} ab, welche mit der Id 3 identifiziert ist und beginnt ab Sekunde 0. 
+
+Die Filterbedingung wird erfüllt, wenn das \adl{opcode}-Feld 1 beinhaltet und das ARP-Packet als Ursprungs-MAC-Adresse nicht die Adresse des Servers enthält. Der erste Parameter zeigt an, dass es sich um ein ARP-Antwort \cite{RFC0826} handelt. 
+
+Sollte die Filterbedingung erfüllt sein, wird ein neues ARP-Datenpaket \adl{arpPacket} erstellt und Variablen für die Ursprungs-MAC-Adresse \adl{srcMac}, Ursprungs-IPv4-Adresse \adl{srcIp} und Ziel-IPv4-Adresse \adl{dstIp} erstellt. Daraufhin werden diese Variablen mit den Werten aus dem abgefangenen ARP-Datenpaket gefüllt.
+
+In dem neu erstellten ARP-Datenpaket wird der \adl{opcode} 2 gesetzt, welcher signalisiert, dass es sich um eine ARP-Antwort \cite{RFC0826} handelt. Für eine ARP-Antwort müssen die Adressfelder der ARP-Anfrage getauscht werden.
+
+Um das Datenpaket über die \gls{layer2} zu versenden, müssen die \adl{controlInfo}-Informationen für die Ziel-MAC-Adresse gesetzt werden. Zusätzlich wird mit dem \adl{etherType 2054} signalisiert, dass es sich um ein ARP-Datenpaket \cite{RFC1700, RFC3232} handelt. Mit diesen Informationen wird das Datenpaket an den Netzwerklayer übergeben und das Original Datenpaket wird aus der Simulation entfernt.
+
+Eine zweite Variante dieses Angriffs zielt auf den studentischen Bereich ab und verhält sich in allen anderen Aspekten gleich. Im Gegensatz zu der normalen Netzwerkkonfiguration, wird der ARP-Cache-Timout auf 30 Sekunden gestellt, um mehrere ARP-Auflösungen im Simulationszeitraum zu beobachten.
+
+\section{Umsetzung des DoS-Angriffs}
+\begin{program}[ht]
+	\lstinputlisting[firstline=0, language=ADL, caption={[DoS Definition]}]{tucsnet/attacks/ddosLarge.adl}
+	\caption{Angriffsdefinition für den großen DoS-Angriff} 
+	\label{lst:ddosAdl}
+\end{program}
+Aufgrund des rudimentären Aufbaus der Internetsimulation wird anstatt eines DDoS-Angriffs, ein \gls{dosa} implementiert, welcher im Quellcode \ref{lst:ddosAdl} dargestellt ist . 
+
+Der Angriff wird von dem Knoten \ned{eve} durchgeführt, welcher mit der ID 617 identifiziert ist. Nach 75 Sekunde wird jede \SI{0.1}{\micro\second} ein TCP-Segment (\adl{0010}) erstellt. Dies entspricht  \SI{1}{\mega\packets\per\second} und liegt im Rahmen häufiger Angriffsintensitäten \ref{sec:initensität}. 
+
+Mit dem \adl{change}-Befehl wird das TCP-Segment konfiguriert. Um ein SYN-Flooding zu simulieren wird das SYN-Bit gesetzt. Alle anderen Flags verbleiben im Standardzustand. Eine zufällige Zuweisung der Sequenznummern ist nicht möglich, da \gls{seapp} dabei einen Fehler erzeugt. Daher wird für diesen Angriff das \adl{sequenceNo}-Feld auf den festen Wert 123 gesetzt. Dies sollte kein Unterschied für die Simulation ergeben, da der Wert von der TCP-Implementierung nicht geprüft wird. Die Bestätigungsnummern werden entsprechend dem Standard mit 0 vorkonfiguriert.
+
+Um die Segmente versenden zu können, wird ein controlInfo-Objekt mit der Zieladresse und dem transportierten Protokoll angefügt. Die Zieladresse ist dabei \IpAdress{129.217.13.1}, was dem Modul \ned{irbServer[0]} entspricht. Da es sich um ein TCP-Segment handelt, welches von IPv4 transportiert wird, muss das \adl{protocol}-Feld mit $6$ initialisiert \cite{RFC1700,RFC3232} werden. 
+
+Durch die Änderung des \adl{outputGates} auf \adl{tcp\_net\_inf} wird das Segment an die Netzwerkschicht übergeben, wenn es mit \adl{put} in den Buffer gelegt wird.
+
+Der Angriff wird in zwei zusätzlichen Abstufungen ausgeführt, welche jeweils eine Zehnerpotenz weniger Pakete pro Sekunde versendet. Für jede dieser Abstufungen existiert zusätzlich ein Szenario, bei dem der betroffene Knoten 5 Sekunden nach Beginn des Angriffs deaktiviert wird. Dies wird durch den \adl{destroy}-Befehl realisiert.
+
+\section{Umsetzung des Port-Scanners}
+\begin{program}[ht]
+	\lstinputlisting[firstline=0, language=ADL, caption={[Port-Scanner Definition]}]{tucsnet/attacks/portPassive.adl}
+	\caption[ACK-Scan]{Angriffsdefinition für den passiven ACK-Scan}
+	\label{lst:portAdl}
+\end{program}
+
+Auf der Paketebene arbeitet ein klassischer Port-Scanner ähnlich zu einem \gls{dos} Angriff. Um ein möglichst unterschiedlichen Angriff zu erzeugen, wird ein passiver Scan durchgeführt, welcher nur auf SYN-Segmente reagiert. In dem Quellcode \ref{lst:portAdl} wird die Implementierung dargestellt. 
+
+Der Angriff wird von dem Knoten mit der ID 3, welche dem \ned{irbServer[0]} entspricht, ausgeführt. Bei dem Simulationsstart wird durch eine Filterbedingung geprüft, ob es sich um TCP-Segmente mit gesetzten SYN-Bit handelt, welche von Geräten mit einer anderen IP gesendet wurden. Es muss vermieden werden, dass das Segment von dem \ned{GlobalFilter} erzeugt wurde, da sonst eine Schleife entsteht.
+
+Für alle Pakete, welchen den Filter erfüllen, werden Variablen für die IPv4-Adresse und den Ursprungsport erstellt und jeweils mit den Werten aus dem abgefangenen Transportpaket und TCP-Segment ausgefüllt. Die Variablen müssen mit einem Wert initialisiert werden, da \gls{seapp} sonst einen Fehler\footnote{Error: variable 'srcPort' must be initialized - Line 16} beim Übersetzen anzeigt.
+
+Wie bei dem \gls{dosa}, wird ein neues TCP-Segment erstellt, bei dem anstatt des SYN-Bits das ACK-Bit gesetzt wird. Der Ursprungsport ist aufgrund einer fehlenden Zufallsportfunktion\footnote{Die Zufallsfunktion für ein Shortinteger wird nicht in dem Portfeld unterstützt.} fixiert. Im Feld des Zielports wird der ausgelesene Ursprungsport genutzt. Da das Paket an die Internetschicht übergeben wird, muss ein \ini{controlInfo}-Objekt erzeugt werden und mit der Zieladresse und dem zu transportierenden Protokoll ausgefüllt werden. 
+
+Zum Schluss muss das \adl{outputGate} wie bei dem \gls{dosa} gesetzt werden und das Paket mit \adl{send} an die Internetschicht übergeben werden. Im Gegensatz zu dem \gls{dosa}, sollte dieser Angriff deutlich weniger Netzwerkverkehr generieren.
+
+\subsection{Fehlerbehebung}
+Wenn die Angriffsbeschreibung \ref{lst:portAdl} ausgeführt wird, kommt es nach einer kurzen Zeit zu einem Fehler in der Simulation, welcher die Ausführung stoppt. Dieser Fehler kann auf die Nutzung von einem bedingten Angriff zurückgeführt werden. Für die Filterbedingung wird jede Nachricht, welche den \ned{LocalFilter} passiert, geprüft. Bei der Prüfung wird die Schicht der Nachricht durch Auslesen der \ned{packetClassName} festgestellt. Sollte das Paket nicht bekannt sein, führt dies zu einem Fehler in der Simulation. 
+
+In der aktuellen Konfiguration der Simulation werden drei, für \gls{seapp} unbekannte Datenpakete, mit den Klassennamen erstellt:
+\begin{enumerate}
+	\item \csource{GenericAppMsg},
+	\item \csource{PingPayload},
+	\item \csource{ICMPMessage}
+\end{enumerate}
+
+Diese Datenpakete müssen eine Schicht zurückgeben. Daher wird die \file{seapputils.cc} in der \csource{getPacketLayer}-Methode um drei Konditionalabfragen für die jeweiligen Pakete erweitert.    
+

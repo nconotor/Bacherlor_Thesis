@@ -1,0 +1,23 @@
+list dest = {3}
+from 0 nodes in dest do {
+    filter("NET.transportProtocol" == 6 and "TRA.synBit" == true and "NET.srcAddress" != "129.217.13.1" and "attackInfo.fromGlobalFilter" == 0)
+
+    packet tcpPacket
+
+    var srcIp = "empty"
+    var srcPort = "empty"
+
+    retrieve(original, "NET.srcAddress", srcIp)
+    retrieve(original, "TRA.srcPort", srcPort)
+
+    create(tcpPacket, "TRA.type", "0010")
+
+    change(tcpPacket, "TRA.srcPort", 45515)
+    change(tcpPacket, "TRA.destPort", srcPort)
+    change(tcpPacket, "TRA.ackBit", "true")
+    change(tcpPacket, "controlInfo.destAddr", srcIp)
+    change(tcpPacket, "controlInfo.protocol", 6)
+    change(tcpPacket, "sending.outputGate", "tcp_net_inf$o[0]")
+
+    send(tcpPacket, 0)
+}

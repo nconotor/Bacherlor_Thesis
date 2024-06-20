@@ -1,0 +1,26 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{backgrounds,calc,positioning}
+\begin{document}
+	\begin{tikzpicture}	[
+		block/.style={
+			draw,
+			rectangle,
+			align=center,
+			text width={2cm},
+			font=\small}
+		]
+		
+		\only<2->{\node[block, tulight] at (0,0) (ASL) { \textbf{DSL} \\ \tiny ASL/ADL};}
+		\only<1>{\node[block, tudark] at (0,0) (ASL) { \textbf{DSL} \\ \tiny ASL/ADL};}
+		
+		\only<1,3>{\node[block, tulight] at (3,0) (ASI) { \textbf{Interpreter} \\ \tiny ASI};}
+		\only<2>{\node[block, tudark] at (3,0) (ASI) { \textbf{Interpreter} \\ \tiny ASI};}
+		
+		\only<1-2>{\node[block, tulight] at (6,0) (ASE) { \textbf{Engine} \\ \tiny ASE};}
+		\only<3>{\node[block, tudark] at (6,0) (ASE) { \textbf{Engine} \\ \tiny ASE};}
+		
+		\draw[ultra thick, ->, tugreen] (ASL) -- (ASI);
+		\draw[ultra thick, ->, tugreen] (ASI) -- (ASE);
+	\end{tikzpicture}
+\end{document}

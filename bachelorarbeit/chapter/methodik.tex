@@ -1,0 +1,148 @@
+\chapter{Methodik}\label{chap:methodik3}
+In diesem Kapitel werden die Angriffsstrategien und deren genutzten Protokolle erklärt. Weiterhin soll ein vereinfachtes Modell des Netzwerks der Fakultät für Informatik an der \gls{tu} vorgestellt werden.
+
+\section{Angriffsszenarien}
+Als Angriff (englisch Attack) wird eine schädliche Aktion gegen ein Netzwerk oder Knoten eines Netzwerks bezeichnet. Ein Angreifer wird dementsprechend die ausführende Partei eines Angriffs genannt. Für diese Bachelorarbeit wurden drei unterschiedliche Typen von Angriffen simuliert, deren Aufbau und Ablauf im Folgenden beschrieben wird.
+
+\subsection{Angriffsvariante: ARP-Poisoning}
+Das \gls{arp} stellt die Verbindung zwischen Vermittlungs- und Sicherungsschichtprotokollen her. Obwohl die Definition in \gls{rfc} 826 \cite{RFC0826} verschiedene Internet- und Netzzugangsprotokolle vorsieht, wird häufig \gls{ipv4}\footnote{IPv6 verwendet ein anderes Protokoll \cite{RFC2461}.} und Ethernet genutzt. Ungeachtet das IPv4-Adressen verwendet werden, läuft die Kommunikation nur über die Sicherungsschicht im \gls{tcpip}, womit das Protokoll dieser zuzuordnen ist.
+
+\subsubsection{Aufbau}
+\begin{figure}[ht]
+	\centering
+	\begin{bytefield}[endianness=little]{16}
+		\bitheader{0-15} \\
+		\wordbox{1}{Hardware type  } \\
+		\wordbox{1}{Protocol type   } \\
+		\bitbox{8}{HLN } & \bitbox{8}{PLN } \\
+		\wordbox{1}{Operation code } \\
+		\wordbox{3}{Sender hardware address (SHA)} \\
+		\wordbox{2}{Sender protocol address (SPA)} \\
+		\wordbox{3}{Target hardware address (THA)} \\
+		\wordbox{2}{Target protocol address (TPA)} \\
+	\end{bytefield}
+	\caption{Der ARP-Header nach RFC 826 \cite{RFC0826}}
+	\label{fig:arpHeader}
+\end{figure}
+
+Die \gls{arp} \gls{pdu} (\ref{fig:arpHeader}) besitzt Felder für die MAC- und \gls{ipv4}-Adressen des Senders und Empfängers. Zusätzlich existiert ein Headerfeld für den ARP-Datenpakettyp, welcher entweder eine ARP-Anfrage (Request) oder eine ARP-Antwort (Reply) ist. Weitere Felder werden für die Nutzung von anderen Netzzugangs- und Internetprotokollen benötigt  \cite{RFC0826},wobei deren Werte aus einer Datenbank entnommen werden \cite{RFC3232,RFC2390} können. 
+
+\paragraph{Ablauf einer Adressauflösung}
+Der Adressauflösungsablauf wird in RFC 1180 \cite{RFC1180} vorgestellt. Jeder Client hält in einem Netzwerk einen \emph{ARP-Cache} vor, in dem bereits bekannte Adresszuordnungen gespeichert sind. Im Regelfall werden Einträge in diesem regelmäßig gelöscht. Sollte ein Dienst der Vermittlungsschicht ein neues Paket zum Versenden erhalten, dessen \gls{ipv4}-Adresse noch nicht bekannt ist, wird eine neue \emph{ARP-Anfrage} erstellt. Eine Anfrage enthält ein leeres Ziel-IP-Feld (TPA) und wird per Broadcast an alle Geräte in der \emph{ARP-Broadcastdomäne} gesendet 
+
+Der Empfänger, mit der geforderten IPv4-Adresse oder dem Gateway zu der entsprechenden IPv4-Adresse, antwortet auf diese Nachricht mit einer \emph{ARP-Antwort}. Diese Antwort wird direkt an den Sender der Anfrage geschickt. Sender- und Empfängerfelder sind in der \emph{ARP-Antwort} im Vergleich zur \emph{ARP-Anfrage} vertauscht.
+
+Der ursprüngliche Sender der Anfrage kann beim Erhalt der Antwort mit der TPA eine neue Zuordnung in seinem \emph{ARP-Cache} speichern und \emph{Rahmen}\footnote{Als Rahmen (Frame) wird eine \gls{pdu} der \gls{layer2} bezeichnet.} an diese Adresse versenden.
+
+\subsubsection{Angriffsvektor}
+Eine fehlende Verifikation der \emph{ARP-Antwort}, ermöglicht falsche oder bösartige Adressauflösungen an ein Netzwerkknoten zu schicken. Dies kann unterschiedliche Auswirkungen auf ein Netzwerk haben. Der Netzwerkverkehr kann durch ungültige Zuordnungen gestört oder gezielt auf bestimmte Knoten umgeleitet werden. Angriffe auf das ARP-System nennt man ARP-Spoofing oder ARP-Poisoning \cite{BSIGlossar}.
+
+\subsection{Angriffsvariante: Denial of Service}
+Ein \gls{dosa} zielt darauf ab, eine bestimmte Netzwerkkomponente eines Netzes in ihrer Verfügbarkeit zu stören \cite{BSIGlossar}. Dies kann durch eine große Anzahl an Anfragen an einen Dienst dieser Komponente realisiert werden. Aufgrund der großen Netzwerkkapazitäten, welche dafür benötigt werden, ist der \gls{ddosa} entstanden, welche den \gls{dos} um eine verteile Menge an Angreifern erweitert. Genauer betrachtet wurden DoS-Angriffe in \gls{rfc} 4732 \cite{RFC4732}.
+
+Für einen \gls{dosa} gibt es verschiedene Methoden, die unterschiedliche Protokolle im \gls{tcpip} ausnutzen. In dieser Bachelorarbeit wird eine Schwachstelle im Verbindungsaufbau des \gls{tcp} ausgenutzt, welche im Folgenden vorgestellt wird.
+
+\subsubsection{Transmission Control Protocol}
+\begin{figure}[ht]
+	\centering
+	\begin{bytefield}[endianness=little]{32}
+		\bitheader{0-31} \\
+		\bitbox{16}{Ursprungsport } & \bitbox{16}{Zielport } \\
+		\wordbox{1}{Sequenznummer} \\
+		\wordbox{1}{Bestätigungsnummer} \\
+		\bitbox{4}{\tiny Datenoffset } & \bitbox{4}{\tiny Reserviert } & \bitbox{1}{\tiny C\\W\\R }  & \bitbox{1}{\tiny E\\C\\E } & \bitbox{1}{\tiny U\\R\\G } & \bitbox{1}{\tiny A\\C\\K } & \bitbox{1}{\tiny P\\S\\H } & \bitbox{1}{\tiny R\\S\\T }  & \bitbox{1}{\tiny S\\Y\\N } & \bitbox{1}{\tiny F\\I\\N } & \bitbox{16}{Fenster }\\
+		\bitbox{16}{Prüfsumme} & \bitbox{16}{Dringend-Zeiger}\\
+		\bitbox{24}{Optionen} & \bitbox{8}{Frei}\\
+		\wordbox{1}{Daten} \\
+	\end{bytefield}
+	\caption{TCP-Header nach RFC 739 \cite{RFC0793} mit Erweiterung durch RFC 3168 \cite{RFC3168}}
+	\label{fig:tcpHeader}
+\end{figure}
+
+\gls{tcp} wurde als Protokoll für die zuverlässige Kommunikation zwischen zwei Clients in \gls{rfc} 739 \cite{RFC0793} vorgestellt. Der Header, abgebildet in Abbildung \ref{fig:tcpHeader}, besitzt Felder für Quell- und Zielport, sowie Sequenz- und Bestätigungsnummern. Für den folgenden Angriff wichtig sind vor allem die TCP-Flags, welche \ua für den Verbindungsaufbau und -abbau eine wichtige Rolle spielen.
+
+\paragraph{Verbindungsaufbau}
+\begin{figure}[ht]
+	\centering
+	\begin{subfigure}[t]{0.5\textwidth}
+		\includestandalone[width=\textwidth,keepaspectratio]{tikz/baTCPHandshake}
+		\caption{Vereinfachter TCP 3-Way-Handshake nach RFC  739 \cite{RFC0793}}
+		\label{fig:tcpHandshake}
+	\end{subfigure}%
+	\begin{subfigure}[t]{0.5\textwidth}
+		\includestandalone[width=\textwidth, keepaspectratio]{tikz/baTCPSynFlood}
+		\caption{Ablauf eines SYN-Flooding-Angriffs}
+		\label{fig:tcpSynFlood}
+	\end{subfigure}
+	\caption{Ablauf eines normalen TCP-Handshakes und eines SYN-Flooding-Angriffs}
+	\label{fig:tcpHandshakeAndFlod}
+\end{figure}
+Ein Three-Way-Handshake initiiert den TCP-Verbindungsaufbau. Durch diesen wird sichergestellt, dass beide Geräte kommunizieren können. In Abbildung \ref{fig:tcpHandshake} wird eine vereinfachte Version vorgestellt, welche folgende drei Schritte durchläuft:
+\begin{enumerate}
+	\item Zuerst wird ein TCP-Segment von dem Sender, mit gesetzten \emph{SYN}-Bit versendet. Die Sequenznummer ist zufällig und die Bestätigungsnummer auf null gesetzt.
+	\item Der Empfänger antwortet mit einem Segment, bei dem das \emph{SYN}- und \emph{ACK}-Bit gesetzt sind.
+	\item Dieses Antwortsegment wird von dem Sender mit einem Segment, in welchem das \emph{ACK}-Bit gesetzt wurde, bestätigt. 
+\end{enumerate}
+
+\paragraph{Angriff auf den Verbindungsaufbau}
+Ein Angreifer kann diesen Verbindungsaufbau für einen Angriff ausnutzen. Hierzu sendet ein Angreifer viele Segmente mit gesetzter \emph{SYN}-Flag und antwortet nicht auf die Bestätigung des Empfängers. Dies führt dazu, dass ein Angriffsziel auf eine Vielzahl von Verbindungen wartet und dadurch Ressourcen verbraucht. Es entsteht zusätzlich Netzwerkverkehr durch die gesendeten Bestätigungen. Ein solcher Angriff wird SYN-Flooding genannt und gehört zu den häufigsten Angriffsmethoden \cite{Yoachimik2020}.
+
+\paragraph{Intensität} \label{sec:initensität}
+Die Intensität eines DoS-Angriffs kann mit dem verursachten Netzwerkdatendurchsatz (\si{\byte\per\second}) und mit der Anzahl an Packeten pro Sekunde (\si{\packets\per\second}) gemessen werden. Cloudflare, ein großer Anbieter für Netzwerkdienstleistungen, veröffentlicht quartalsweise Statistiken über die \gls{ddosa} auf ihre Kunden. Nach \citetitle{Yoachimik2020} \cite{Yoachimik2020} verursachten im zweiten Quartal 2020 der Großteil der Angriffe ein Paketaufkommen von  \SI{50}{\kilo\packets\per\second} bis \SI{1}{\mega\packets\per\second}. Die meisten Angriffe dauerten zwischen 30 und 60 Minuten \cite{Yoachimik2020}.
+
+\subsection{Angriffsvariante: Port-Scanner}
+Ports differenzieren unterschiedliche Verbindungen zu einem Host und identifizieren Dienste. Für den zweiten Verwendungszweck werden Zuweisungsregeln in RFCs festlegt. Eine der neusten RFCs hinsichtlich der Portzuweisung ist RFC 7605 \autocite{RFC7605}, in dem zusätzlich der Begriff des Ports definiert wurde. Wegen dieser Nähe zu laufenden Diensten, ist das Wissen über offene Ports essenziell, da so Hinweise auf laufende Anwendungen gefunden werden können. Diese Anwendungen stellen weitere Angriffsvektoren dar. Als Vermittlungsschichtfunktionalität setzt TCP das Portkonzept um. Implementierungen von \gls{tcp} reagieren unterschiedlich auf Segmente mit gesetzten TCP-Flags an offene oder geschlossene Ports. Das Standardverhalten ist jeweils in der RFC 739 \cite{RFC0793} festgelegt.
+
+\paragraph{TCP-ACK-Scan}
+\begin{figure}[ht]
+	\centering
+	\includestandalone[keepaspectratio]{tikz/baTCPAckAnswer}
+	\caption{Vorgesehene Antwort auf ein unerwartetes TCP-Segment mit gesetztem ACK-Bit RFC 739 \cite{RFC0793}}
+	\label{fig:baTCPAckAnswer}
+\end{figure}
+Der zu implementierende Angriff ist ein sogenannter TCP-ACK-Scan\footnote{Namen von Angreifen können sich unterscheiden. Der Name wurde aufgrund der Nutzung von \emph{nmap}, einem bekannten Netzwerkscanner, gewählt. \url{https://nmap.org/book/scan-methods-ack-scan.html}}, welcher auf der in \citetitle{RFC0793} vorgestellten Reaktion auf unbekannte Segmente mit gesetztem \emph{ACK}-Bit basiert. Nach RFC reagiert die TCP-Implementierung, wie dargestellt in Abbildung \ref{fig:baTCPAckAnswer}, auf solche Segmente mit einer Antwort, bei welcher das \emph{RST}-Bit gesetzt ist. Dabei spielt es keine Rolle, ob der Port geöffnet oder geschlossen ist. Im eigentlichen Sinn handelt es sich deshalb nicht um einen Port-Scanner, sondern um ein Firewall-Scanner.
+
+Ein Host mit Firewall wird in der Regel Ports filtern und Segmente ignorieren oder mit einem \gls{icmp}-Segment beantworten. Das Senden von modifizierten Segmenten gibt daher Aufschluss über durch Firewalls gefilterte Ports.
+
+Der Angriff soll wie folgt ablaufen:
+\begin{enumerate}
+	\item Gehe von einem infizierten Knoten im Netzwerk aus.
+	\item Für jedes TCP-Segment an diesem Knoten, welches eine neue Verbindung aufbaut, also ein gesetztes \emph{SYN}-Bit enthält, erstelle ein neues TCP-Segment und
+	\item sende dieses mit gesetztem \emph{ACK}-Bit an den Sender.
+\end{enumerate}
+
+\section{Das Netzwerk der Fakultät für Informatik}\label{sec:aufbau}
+In diesem Abschnitt soll der Aufbau des Netzwerks der Fakultät Informatik an der TU-Dortmund (Informatiknetzwerk) beschrieben werden. Die Informationen über das Netzwerk wurden bei der \gls{irb} und dem \gls{itmc} erfragt. Für die Verwaltung des Netzwerks der Informatikfakultät ist die \gls{irb} zuständig und für den außerfakultären Bereich das \gls{itmc}.
+
+\subsection{Vereinfachter Aufbau}
+\begin{figure}[ht]
+	\centering
+	\includestandalone[keepaspectratio]{tikz/baTopReal}
+	\caption[Vereinfachtes Informatiknetzwerk]{Vereinfachte Darstellung des Netzwerks der Fakultät für Informatik an der TU-Dortmund}
+	\label{fig:tucsnetwork}´
+\end{figure}
+
+Das Informatiknetzwerk, vereinfacht abgebildet in der Grafik \ref{fig:tucsnetwork}, ist ein Teil des Universitätsnetzwerkes. Mit dem Internet verbunden ist die \gls{tu} über das \gls{dnf} mit zweimal  \SI{5}{\giga\bit\per\second}\footnote{Die Universität Bochum und Duisburg-Essen sind jeweils mit \SI{10}{\giga\bit\per\second} angebunden}. Das Informatiknetz ist ein reines Ethernet, wobei \gls{wlan} Funktionalitäten im Bereich des ITMCs liegen. 
+
+Topologisch wird das Informatiknetzwerk durch die Aufteilung der Informatikfakultät auf drei Gebäude, welche aufgrund ihres Standorts an der \gls{oh}, im weiteren Verlauf OH12, OH14 und OH16 genannt werden, bestimmt.
+
+In der OH12 befindet sich der Übergabepunkt zum Universitätsnetz. Von der OH12 ausgehend sind die OH14 und OH16 verbunden. Das Informatiknetzwerk, kann in einen Campus- und einen Datacenterbereich, welcher in der OH12 liegt, aufgeteilt werden. Der Datacenterbereich ist mit \SI{40}{\giga\byte\per\second} und die Campusbereiche jeweils mit zweimal \SI{20}{\giga\byte\per\second} angebunden.
+
+Über eine \gls{sterntopologie} sind alle Geräte eines Gebäudes an einem zentralen Verteilerraum angebunden, welcher mit dem IRB-Router verbunden ist. Da alle Gebäude an dem zentralen Router angebunden sind, setzt sich die \gls{sterntopologie} zu diesem fort. Der zentrale Router besteht aus zwei mit \gls{vss} verbundenen Routern. 
+
+Eine Differenzierung der einzelnen Netze wird nicht über dedizierte Hardware, \ua eigene Switchinghardware für jeden Lehrstuhl, sondern über den Router mithilfe von \gls{vlan} vorgenommen. Entsprechend sind über die \glspl{vlan} die Broadcastdomainen definiert.
+
+Das gesamte Netzwerk ist in ungefähr 90 Subnetze eingeteilt, mit durchschnittlich 700 aktiven Geräten, welche ihre IP-Adressen je nach Subnetz, aus dem Adressbereich \IpAdress{129.217.1.1} bis \IpAdress{129.217.63.255} beziehen.
+
+Vereinfacht kann davon ausgegangen werden, dass jedes Gerät mit \SI{1}{\giga\bit\per\second} an den Switches angebunden ist. Im Datacenterbereich liegen die Anbindungen bei \SI{10}{\giga\bit\per\second}. Das Netzwerk ist durch verschiedene Sicherheitsmaßnahmen geschützt, auf welche nicht weiter eingegangen wird, da die Modellierungsmöglichkeiten in dieser Bachelorarbeit fehlen.
+
+\subsection{Netzwerkverkehr}
+Im Netzwerk werden verschiedene Dienste angeboten und genutzt. Da in \gls{omnetpp} keine echten Applikationen auf den Geräten laufen, sind die verschiedenen genutzten Protokolle von vorrangigem Interesse.
+
+Der TCP-Netzwerkverkehr wird durch eine Vielzahl von Diensten im Informatiknetzwerk erzeugt. Viele Lehrstühle und Studenten benutzen Versionierungssysteme wie \gls{git} und \gls{svn}. Außerdem wird auf verschiedene HTTP-Dienste, wie interne und externe Webseiten zugegriffen. Von dem \gls{irb} werden einige Dienste wie zum Beispiel das \gls{bbb}, DHCP, VPN, ein Datensicherungsdienst sowie Dienste für den E-Mail-Empfang und -Versand, bereitgestellt. Durch die tägliche Nutzung dieser Dienste ist \gls{tcp} eine wichtige Komponente des Netzwerkverkehrs. Das \gls{bbb} und weitere Videostreamingservices sind Quellen von UDP-Netzwehrverkehr. Zusätzlich fällt \gls{icmp} Netzwerkverkehr an.
+
+\subsection{Auslastung}
+Aufgrund von Schwankungen kann eine genaue Auslastung des Netzwerks nicht bestimmt werden. Die Frage, wo die Netzwerksauslastung zu messen ist, kann nicht eindeutig beantwortet werden. Für diese Arbeit wird eine Auslastung des Netzes am zentralen Router der IRB gemessen, da dieser im Mittelpunkt des Netzes steht.
+
+Stark vereinfacht, kann festgestellt werden, dass das Netzwerk nur leicht belastet ist. Im Folgenden wird von einer Auslastung von ungefähr \SI{1}{\giga\bit\per\second} an den Ports zum Datacenterbereich ausgegangen. Die Ports zum Außennetz sind geringer ausgelastet.
+

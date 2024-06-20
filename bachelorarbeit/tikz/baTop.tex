@@ -1,0 +1,93 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\begin{document}
+	\begin{tikzpicture}	
+		\node[] at (0, -2) (irbRouter) {\begin{tabular}{c}
+				\includegraphics[width=16pt]{pic/top/router}\\
+				IRB-Router\\
+		\end{tabular}};
+		\node[] at (0, -8) (itmcRouter) {\begin{tabular}{c}
+				\includegraphics[width=16pt]{pic/top/router}\\
+				ITMC-Router\\
+		\end{tabular}};
+		\node[] at (0, -10) (inet) {\begin{tabular}{c}
+				\includegraphics[width=16pt]{pic/top/cloud}\\
+				Internet\\
+		\end{tabular}};
+
+		
+		\node[] at (4, 0) (irbSwitch) {\begin{tabular}{c}
+				\includegraphics[width=16pt]{pic/top/switch}\\
+				Switch \\
+		\end{tabular}};
+		\node[] at (8, 0) (irbServer) {\begin{tabular}{c}
+				\includegraphics[width=16pt]{pic/top/server}\\
+				IRB-Server 0$\dots$9\\
+			\end{tabular}};
+		
+		\node[] at (4, -2) (studentSwitch) {\begin{tabular}{c}
+				\includegraphics[width=16pt]{pic/top/switch}\\
+				Switch \\
+		\end{tabular}};
+		\node[] at (8, -2) (studentPC) {\begin{tabular}{c}
+				\includegraphics[width=16pt]{pic/top/pc}\\
+				Studentische PCs 0$\dots$99\\
+		\end{tabular}};
+		
+		\node[] at (4, -4) (lssSwitch) {\begin{tabular}{c}
+				\includegraphics[width=16pt]{pic/top/switch}\\
+				Switch \\
+		\end{tabular}};
+		\node[] at (8, -4) (lss) {\begin{tabular}{c}
+				\includegraphics[width=16pt]{pic/top/pc}\\
+				Lehrstuhl-1 0$\dots$39\\
+		\end{tabular}};
+	
+		\node[] at (4, -8) (lseSwitch) {\begin{tabular}{c}
+				\includegraphics[width=16pt]{pic/top/switch}\\
+				Switch \\
+		\end{tabular}};
+		\node[] at (8, -8) (lse) {\begin{tabular}{c}
+				\includegraphics[width=16pt]{pic/top/pc}\\
+				Lehrstuhl-14 0$\dots$39\\
+		\end{tabular}};
+		
+
+		\node[] at (4, -10) (aliceServer) {\begin{tabular}{c}
+				\includegraphics[width=16pt]{pic/top/server}\\
+				Alice-Server 0$\dots$9\\
+			\end{tabular}};
+	
+		\node[] at (0, -12) (eve) {\begin{tabular}{c}
+				\includegraphics[width=16pt]{pic/top/laptop}\\
+				Eve\\
+		\end{tabular}};
+	
+		\path[-] (inet) 
+		edge node[midway, above] {\footnotesize $\infty$ \si{\giga\bit\per\second}} (aliceServer)
+		edge node[midway, left] {\footnotesize $\infty$ \si{\giga\bit\per\second}} (eve);
+		
+		\path[-] (irbRouter) 
+		edge node[midway, left] {\footnotesize 40 \si{\giga\bit\per\second}} (itmcRouter);
+		\path[-] (itmcRouter)
+		edge node[midway, left] {\footnotesize 10 \si{\giga\bit\per\second}} (inet);
+		
+		\path[-] (irbRouter) 
+		edge node[midway, above, sloped] {\footnotesize 10 \si{\giga\bit\per\second}} (lssSwitch)
+		edge node[midway, above, sloped] {\footnotesize 10 \si{\giga\bit\per\second}} (lseSwitch)
+		edge node[midway, above, sloped] {\footnotesize 10 \si{\giga\bit\per\second}} (studentSwitch)
+		edge node[midway, above, sloped] {\footnotesize 40 \si{\giga\bit\per\second}} (irbSwitch);
+		
+		\path[-] (lssSwitch) edge node[midway, above] {\footnotesize 1 \si{\giga\bit\per\second}} (lss);
+		\path[-] (lseSwitch) edge node[midway, above] {\footnotesize 1 \si{\giga\bit\per\second}} (lse);
+		\path[-] (studentSwitch) edge node[midway, above] {\footnotesize 1 \si{\giga\bit\per\second}} (studentPC); 
+		\path[-] (irbSwitch) edge node[midway, above] {\footnotesize 10 \si{\giga\bit\per\second}} (irbServer);
+		
+		\draw[dotted] (lssSwitch) 
+		edge (lseSwitch)
+		edge (lse);
+		\draw[dotted] (lss) 
+		edge (lseSwitch)
+		edge (lse);
+	\end{tikzpicture}
+\end{document}
